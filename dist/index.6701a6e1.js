@@ -947,7 +947,7 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _mainView = require("./components/main-view/main-view");
 var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
-//Import statement to indicate that you need to bundle `./index.scss`
+// Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
 class MyFlixApplication extends _reactDefault.default.Component {
@@ -22890,6 +22890,8 @@ $parcel$ReactRefreshHelpers$35bf.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -22906,7 +22908,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 {
                     _id: 2,
-                    Title: 'The Shawshark Redemtion',
+                    Title: 'The Shawshank Redemption',
                     Description: 'desc2...',
                     ImagePath: '...'
                 },
@@ -22942,7 +22944,7 @@ class MainView extends _reactDefault.default.Component {
                         lineNumber: 20
                     },
                     __self: this,
-                    children: "The Shawshark Redemtion"
+                    children: "The Shawshank Redemption"
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                     __source: {
@@ -22956,7 +22958,6 @@ class MainView extends _reactDefault.default.Component {
         }));
     }
 }
-exports.default = MainView;
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
 } finally {
