@@ -1,6 +1,8 @@
 import React from 'react';
+import Axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import axios from 'axios';
 
 export class MainView extends React.Component {
   constructor() {
@@ -13,6 +15,18 @@ export class MainView extends React.Component {
       ],
       selectedMovie: null
     };
+  }
+
+  componentDidMount() {
+    axios.get('http://myflix-application-2021.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   setSelectedMovie(newSelectedMovie) {
