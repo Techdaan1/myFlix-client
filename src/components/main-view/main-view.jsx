@@ -1,8 +1,7 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import axios from 'axios';
 
 export class MainView extends React.Component {
   constructor() {
@@ -38,7 +37,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie } = this.state;
 
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+    if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <div className="main-view">
