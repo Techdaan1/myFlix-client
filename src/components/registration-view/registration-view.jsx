@@ -15,6 +15,7 @@ export function RegistrationView(props) {
 
   return (
     <form>
+      <h2>Welcome to the registration page of MyFlix</h2>
       <label>
         Username:
         <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
