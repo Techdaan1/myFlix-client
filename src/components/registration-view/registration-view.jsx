@@ -10,7 +10,7 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, birthdate);
+    console.log(username, password, email);
     props.onRegistration(username);
     /* Send a request to the server for authentication */
     /* then call props.onLoggedIn(username) */
@@ -43,7 +43,8 @@ export function RegistrationView(props) {
                       onChange={e => setPassword(e.target.value)}
                       required
                       placeholder="Your password must be 8 or more characters"
-                      minLenght="8" />
+                      minLenght="8"
+                      required />
                   </Form.Group>
 
                   <Form.Group>
