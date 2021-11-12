@@ -42,7 +42,7 @@ export function RegistrationView(props) {
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       required
-                      placeholder="Enter password"
+                      placeholder="Your password must be 8 or more characters"
                       minLenght="8" />
                   </Form.Group>
 
@@ -52,8 +52,7 @@ export function RegistrationView(props) {
                       type="email"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
-                      required
-                      placeholder="Enter email" />
+                      placeholder="Enter your email address" />
                   </Form.Group>
 
                   <Button
