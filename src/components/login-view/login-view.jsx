@@ -17,6 +17,7 @@ export function LoginView(props) {
   return (
     <Container>
       <Row>
+        <Col></Col>
         <Col>
           <Card>
             <Form>
@@ -33,6 +34,7 @@ export function LoginView(props) {
             </Form>
           </Card>
         </Col>
+        <Col></Col>
       </Row>
     </Container>
   );
