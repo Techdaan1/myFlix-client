@@ -6,7 +6,7 @@ import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootst
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,12 +47,15 @@ export function RegistrationView(props) {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Birthdate: </Form.Label>
+                    <Form.Label>Email: </Form.Label>
                     <Form.Control
-                      type="date"
-                      value={birthdate}
-                      onChange={e => setBirthdate(e.target.value)} />
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                      placeholder="Enter email" />
                   </Form.Group>
+
                   <Button
                     variant="primary"
                     type="submit"
