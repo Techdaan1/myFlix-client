@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Container, Row, Col } from 'React-bootstrap';
+
 export class MovieView extends React.Component {
 
   keypressCallback(event) {
@@ -10,24 +12,34 @@ export class MovieView extends React.Component {
     document.addEventListener('keypress', this.keypressCallback);
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.keypressCallback);
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} crossOrigin="anonymous" />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <div className="movie-view">
+              <div className="movie-poster">
+                <img src={movie.ImagePath} crossOrigin="true" />
+              </div>
+              <div className="movie-title">
+                <span className="label">Title: </span>
+                <span className="value">{movie.Title}</span>
+              </div>
+              <div className="movie-description">
+                <span className="label">Description: </span>
+                <span className="value">{movie.Description}</span>
+              </div>
+              <button onClick={() => { onBackClick(null); }}>Back</button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
