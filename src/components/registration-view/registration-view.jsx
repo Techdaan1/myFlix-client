@@ -17,7 +17,7 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Col>
           <CardGroup>
