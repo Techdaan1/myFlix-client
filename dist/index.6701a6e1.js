@@ -37440,7 +37440,6 @@ class MovieCard extends _reactDefault.default.Component {
     render() {
         const { movie , onMovieClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
-            fluid: true,
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
                 lineNumber: 11
@@ -37465,6 +37464,7 @@ class MovieCard extends _reactDefault.default.Component {
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
+                            "text-center": true,
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
                                 lineNumber: 15
@@ -37474,7 +37474,7 @@ class MovieCard extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
                                     variant: "top",
                                     src: movie.ImagePath,
-                                    fluid: true,
+                                    fluid: "true",
                                     __source: {
                                         fileName: "src/components/movie-card/movie-card.jsx",
                                         lineNumber: 16
