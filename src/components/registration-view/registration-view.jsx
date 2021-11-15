@@ -17,7 +17,7 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Container fluid>
+    <Container>
       <Row>
         <Col>
           <CardGroup>
@@ -43,7 +43,7 @@ export function RegistrationView(props) {
                       onChange={e => setPassword(e.target.value)}
                       required
                       placeholder="Your password must be 8 or more characters"
-                      minLenght="8"
+                      minlenght="8"
                       required />
                   </Form.Group>
 
