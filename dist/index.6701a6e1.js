@@ -24615,7 +24615,6 @@ function RegistrationView(props) {
         props.onRegistration(username);
     /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ };
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
-        fluid: true,
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
             lineNumber: 20
@@ -24719,7 +24718,7 @@ function RegistrationView(props) {
                                                     ,
                                                     required: true,
                                                     placeholder: "Your password must be 8 or more characters",
-                                                    minLenght: "8",
+                                                    minlenght: "8",
                                                     required: true,
                                                     __source: {
                                                         fileName: "src/components/registration-view/registration-view.jsx",
