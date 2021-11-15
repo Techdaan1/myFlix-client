@@ -37474,6 +37474,7 @@ class MovieCard extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
                                     variant: "top",
                                     src: movie.ImagePath,
+                                    fluid: "true",
                                     __source: {
                                         fileName: "src/components/movie-card/movie-card.jsx",
                                         lineNumber: 16
