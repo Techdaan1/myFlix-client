@@ -57,7 +57,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
-    if (!register) return <RegistrationView onRegistration={register => this.onRegistration(register)} />;
+    if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />);
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
