@@ -15,7 +15,7 @@ export function LoginView(props) {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Col></Col>
         <Col>
