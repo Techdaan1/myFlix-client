@@ -37280,6 +37280,7 @@ function LoginView(props) {
         props.onLoggedIn(username);
     /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ };
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
+        fluid: true,
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
             lineNumber: 18
@@ -37464,6 +37465,7 @@ class MovieCard extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
                                     variant: "top",
                                     src: movie.ImagePath,
+                                    fluid: true,
                                     __source: {
                                         fileName: "src/components/movie-card/movie-card.jsx",
                                         lineNumber: 16
