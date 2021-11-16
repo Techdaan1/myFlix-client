@@ -4,18 +4,6 @@ import { Container, Row, Col } from 'React-bootstrap';
 
 export class MovieView extends React.Component {
 
-  keypressCallback(event) {
-    console.log(event.key);
-  }
-
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
-  }
-
   render() {
     const { movie, onBackClick } = this.props;
 
@@ -25,7 +13,7 @@ export class MovieView extends React.Component {
           <Col>
             <div className="movie-view">
               <div className="movie-poster">
-                <img src={movie.ImagePath} crossOrigin="true" />
+                <img src={movie.ImagePath} />
               </div>
               <div className="movie-title">
                 <span className="label">Title: </span>
