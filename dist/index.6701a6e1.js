@@ -24657,7 +24657,6 @@ function RegistrationView(props) {
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                        md: 8,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 24
