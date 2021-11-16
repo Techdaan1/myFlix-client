@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Row, Col } from 'React-bootstrap';
+import { Container, Row, Col, Card } from 'React-bootstrap';
 
 export class MovieView extends React.Component {
 
@@ -9,22 +9,16 @@ export class MovieView extends React.Component {
 
     return (
       <Container>
-        <Row>
+        <Row className="movie-view">
           <Col>
-            <div className="movie-view">
-              <div className="movie-poster">
-                <img src={movie.ImagePath} />
-              </div>
-              <div className="movie-title">
-                <span className="label">Title: </span>
-                <span className="value">{movie.Title}</span>
-              </div>
-              <div className="movie-description">
-                <span className="label">Description: </span>
-                <span className="value">{movie.Description}</span>
-              </div>
-              <button onClick={() => { onBackClick(null); }}>Back</button>
-            </div>
+            <Card>
+              <Card.Body>
+                <Card.Img className="movie-poster" src={movie.ImagePath} />
+                <Card.Title>{movie.Title}</Card.Title>
+                <Card.Text>{movie.Description}</Card.Text>
+                <button onClick={() => { onBackClick(null); }}>Back</button>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
