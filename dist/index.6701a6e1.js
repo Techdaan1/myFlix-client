@@ -22987,6 +22987,7 @@ class MainView extends _reactDefault.default.Component {
                                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                                 })
                             }));
+                            // Before the movies have been loaded
                             if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                 className: "main-view"
                             }));
@@ -23005,9 +23006,31 @@ class MainView extends _reactDefault.default.Component {
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                        path: "/register",
+                        render: ()=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+                                })
+                            }));
+                        },
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 89
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                         path: "/movies/:movieId",
                         render: ({ match , history  })=>{
-                            return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                            if (!user) return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                    }),
+                                    ";"
+                                ]
+                            }));
+                            if (user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                 md: 8,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
                                     movie: movies.find((m)=>m._id === match.params.movieId
@@ -23018,41 +23041,50 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 88
+                            lineNumber: 95
                         },
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                         path: "/directors/:name",
-                        render: ({ match , history  })=>{
+                        render: ({ history  })=>{
+                            if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                })
+                            }));
                             if (movie.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                 className: "main-view"
                             }));
                             return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                 md: 8,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(DirectorView, {
-                                    director: movies.find((m)=>m.Director.Name === match.params.name
-                                    ).Director,
-                                    onBackClick: ()=>history.goBack()
+                                    history: history,
+                                    movies: movies
                                 })
                             }));
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 94
+                            lineNumber: 105
                         },
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                         path: "/genres/:name",
                         render: ({ match , history  })=>{
+                            if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                })
+                            }));
                             if (movie.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                 className: "main-view"
                             }));
                             return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                 md: 8,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(GenreView, {
-                                    genre: movies.find((m)=>m.Genre.Name === match.params.name
+                                    genre: movies.find((m)=>m.Genre.id === match.params.genreId
                                     ).Genre,
                                     onBackClick: ()=>history.goBack()
                                 })
@@ -23060,7 +23092,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 101
+                            lineNumber: 115
                         },
                         __self: this
                     })
