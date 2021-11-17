@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Container, Row, Col, Card } from 'React-bootstrap';
 
+import { Link } from "react-router-dom";
+
 export class MovieView extends React.Component {
 
   render() {
@@ -16,7 +18,12 @@ export class MovieView extends React.Component {
                 <Card.Img className="movie-poster" src={movie.ImagePath} />
                 <Card.Title>{movie.Title}</Card.Title>
                 <Card.Text>{movie.Description}</Card.Text>
-                <button onClick={() => { onBackClick(null); }}>Back</button>
+                <Link to={`/directors/${movie.Director.Name}`}>
+                  <Button variant="link">Director</Button>
+                </Link>
+                <Link to={`/genres/${movie.Genre.Name}`}>
+                  <Button variant="link">Genre</Button>
+                </Link>
               </Card.Body>
             </Card>
           </Col>
