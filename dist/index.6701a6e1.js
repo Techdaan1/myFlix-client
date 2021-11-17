@@ -22913,6 +22913,7 @@ var _movieView = require("../movie-view/movie-view");
 var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _registrationView = require("../registration-view/registration-view");
+var _profileView = require("../profile-view/profile-view");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -22970,14 +22971,14 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 75
+                lineNumber: 76
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                 className: "main-view justify-content-md-center",
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 76
+                    lineNumber: 77
                 },
                 __self: this,
                 children: [
@@ -23004,7 +23005,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 77
+                            lineNumber: 78
                         },
                         __self: this
                     }),
@@ -23021,7 +23022,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 91
+                            lineNumber: 92
                         },
                         __self: this
                     }),
@@ -23047,7 +23048,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 98
+                            lineNumber: 99
                         },
                         __self: this
                     }),
@@ -23073,7 +23074,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 108
+                            lineNumber: 109
                         },
                         __self: this
                     }),
@@ -23099,7 +23100,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 118
+                            lineNumber: 119
                         },
                         __self: this
                     }),
@@ -23116,7 +23117,7 @@ class MainView extends _reactDefault.default.Component {
                             }));
                             return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                 md: 8,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx(ProfileView, {
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
                                     history: history,
                                     movies: movies,
                                     user: user === match.params.username
@@ -23125,7 +23126,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 128
+                            lineNumber: 129
                         },
                         __self: this
                     })
@@ -23140,7 +23141,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../registration-view/registration-view":"aP2YV","../login-view/login-view":"054li","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp","react-router-dom":"kjA5T","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL"}],"iYoWk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../registration-view/registration-view":"aP2YV","../login-view/login-view":"054li","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp","react-router-dom":"kjA5T","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -44873,6 +44874,8 @@ exports.default = Tooltip;
 },{"classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"aNJBf","./helpers":"7NbHg","react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg"}],"ck15y":[function(require,module,exports) {
 
 },{}],"8WCoL":[function(require,module,exports) {
+
+},{}],"2E7Aw":[function(require,module,exports) {
 
 },{}],"jUTZ8":[function() {},{}]},["asPf7","cM83J","dLPEP"], "dLPEP", "parcelRequireaec4")
 
