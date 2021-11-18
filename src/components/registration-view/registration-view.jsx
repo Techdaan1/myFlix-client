@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import axios from 'axios';
 
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+
+import './registration-view.scss';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
