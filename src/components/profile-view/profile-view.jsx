@@ -17,9 +17,8 @@ export class ProfileView extends React.Component {
       FavoriteMovies: [],
     };
   }
-
   render() {
-    const { Username, Password, Email, Birthday } = this.state;
+    const { Username, Password, Email, Birthday, FavoriteMovies } = this.state;
     const { movies } = this.props;
 
     return (
@@ -28,6 +27,7 @@ export class ProfileView extends React.Component {
           <Col>
             <Card>
               <Card.Body>
+                <Card.Title>My profile information</Card.Title>
                 <Listgroup>
                   <ListGroup.Item>Username: {Username} </ListGroup.Item>
                   <ListGroup.Item>Password: *** </ListGroup.Item>
