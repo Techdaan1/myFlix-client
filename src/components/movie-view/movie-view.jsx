@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Row, Col, Card } from 'React-bootstrap';
 
