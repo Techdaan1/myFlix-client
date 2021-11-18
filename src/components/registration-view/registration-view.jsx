@@ -8,6 +8,7 @@ export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,8 +28,6 @@ export function RegistrationView(props) {
         console.log('error regestering the user')
       });
   };
-
-
 
   return (
     <Container>
@@ -70,10 +69,19 @@ export function RegistrationView(props) {
                       placeholder="Enter your email address" />
                   </Form.Group>
 
+                  <Form.Group>
+                    <Form.Label>Birthday: </Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={birthday}
+                      onChange={e => setBirthday(e.target.value)}
+                      placeholder="Enter your birthday" />
+                  </Form.Group>
+
                   <Button
                     variant="primary"
                     type="submit"
-                    onClick={handleSubmit}>Submit
+                    onClick={handleSubmit}>Create Account
                   </Button>
                 </Form>
               </Card.Body>
