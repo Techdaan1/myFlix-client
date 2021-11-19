@@ -6,7 +6,7 @@ import './director-view.scss';
 
 export class DirectorView extends React.Component {
   render() {
-    const { director, onBackClick } = this.props;
+    const { movie, onBackClick } = this.props;
 
     return (
       <Container>
@@ -15,12 +15,17 @@ export class DirectorView extends React.Component {
             <div className="director-view">
               <div className="director-name">
                 <span className="name">Name: </span>
-                <span className="value">{director.Name}</span>
+                <span className="value">{movie.Director.Name}</span>
               </div>
 
               <div className="director-bio">
                 <span className="bio">Bio: </span>
-                <span className="value">{director.Bio}</span>
+                <span className="value">{movie.Director.Bio}</span>
+              </div>
+
+              <div className="director-bio">
+                <span className="bio">Birth: </span>
+                <span className="value">{movie.Director.Birth}</span>
               </div>
 
               <button onClick={() => { onBackClick(null); }}>Back</button>
