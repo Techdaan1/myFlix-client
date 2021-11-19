@@ -12,49 +12,45 @@ export class MovieView extends React.Component {
 
     return (
 
-      <Container className="moviesContainer">
-        <Row>
+      <Container className="movie-container">
+        <Row className="movie-title">
+          <Col className="title">Title: </Col>
+          <Col className="value">{movie.Title}</Col>
+        </Row>
+
+        <Row className="movie-poster">
           <Col>
-            <div className="movie-view">
-              <div className="movie-poster">
-                <img src={movie.ImagePath} crossOrigin="true" />
-              </div>
-              <div className="movie-title">
-                <span className="title">Title: </span>
-                <span className="value">{movie.Title}</span>
-              </div>
-              <div className="movie-description">
-                <span className="description">Description: </span>
-                <span className="value">{movie.Description}</span>
-              </div>
-              <div className="movie-genre">
-                <span className="genre">Genre: </span>
-                <span className="value">{movie.Genre.Name}</span>
-              </div>
-              <div className="movie-director">
-                <span className="director">Director: </span>
-                <span className="value">{movie.Director.Name}</span>
-              </div>
-
-              <div className="director-button">
-                <Link to={`/directors/${movie.Director.Name}`}>
-                  <Button className="director-button">Director</Button>
-                </Link>
-              </div>
-
-              <div className="genre-button">
-                <Link to={`/genres/${movie.Genre.Name}`}>
-                  <Button className="genre-button">Genre</Button>
-                </Link>
-              </div>
-
-              <div className="movie-button">
-                <Button className="movie-button" onClick={() => { onBackClick(null); }}>Back</Button>
-              </div>
-            </div>
+            <img src={movie.ImagePath} crossOrigin="true" />
           </Col>
         </Row>
-      </Container>
+
+        <Row className="movie-description">
+          <Col className="description">Description: </Col>
+        </Row>
+        <Row>
+          <Col className="value">{movie.Description} </Col>
+        </Row>
+
+        <Row className="movie-director">
+          <Col className="director">Director: </Col>
+          <Col className="value">
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant="link">{movie.Director.Name}</Button>
+            </Link>
+          </Col>
+        </Row>
+
+
+        <Row className="movie-genre">
+          <Col className="genre">Genre: </Col>
+          <Col className="value">
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant="link">{movie.Genre.Name}</Button>
+            </Link>
+          </Col>
+        </Row>
+        <Button className="movie-button" onClick={() => { onBackClick(null); }}>Back</Button>
+      </Container >
     );
   }
 }
