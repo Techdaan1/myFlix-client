@@ -6,7 +6,7 @@ import './genre-view.scss';
 
 export class GenreView extends React.Component {
   render() {
-    const { genre, onBackClick } = this.props;
+    const { movie, onBackClick } = this.props;
 
     return (
       <Container>
@@ -15,12 +15,12 @@ export class GenreView extends React.Component {
             <div className="genre-view">
               <div className="genre-title">
                 <span className="label">Name: </span>
-                <span className="value">{genre.Name}</span>
+                <span className="value">{movie.Genre.Name}</span>
               </div>
 
               <div className="genre-description">
                 <span className="label">Description: </span>
-                <span className="value">{genre.Description}</span>
+                <span className="value">{movie.Genre.Description}</span>
               </div>
 
               <button onClick={() => { onBackClick(null); }}>Back</button>
