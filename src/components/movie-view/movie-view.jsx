@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export class MovieView extends React.Component {
 
   render() {
-    const { movie } = this.props;
+    const { movie, onBackClick } = this.props;
 
     return (
       <Container>
@@ -25,6 +25,7 @@ export class MovieView extends React.Component {
                 <Link to={`/genres/${movie.Genre.Name}`}>
                   <Button variant="link">Genre</Button>
                 </Link>
+                <Button onClick={() => { onBackClick(null); }} >Back</Button>
               </Card.Body>
             </Card>
           </Col>
@@ -33,3 +34,13 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.prototype = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Descripton: PropTypes.string,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.array,
+    Director: PropTypes.array
+  }).isRequired
+};
