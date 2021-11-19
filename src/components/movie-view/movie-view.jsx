@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Row, Col, Card } from 'React-bootstrap';
+import { Container, Row, Col, Button, Card } from 'React-bootstrap';
 
 import { Link } from "react-router-dom";
+
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
@@ -13,43 +15,39 @@ export class MovieView extends React.Component {
     return (
 
       <Container className="movie-container">
-        <Row className="movie-title">
-          <Col className="title">Title: </Col>
-          <Col className="value">{movie.Title}</Col>
-        </Row>
-
-        <Row className="movie-poster">
+        <Row className="justify-content-md-center">
           <Col>
-            <img src={movie.ImagePath} crossOrigin="true" />
+            <div className="movie-poster">
+              <img src={movie.ImagePath} roundedCircle />
+            </div>
+
+            <div className="movie-title">
+              <span className="label">Title: </span>
+              <span className="value">{movie.Title}</span>
+            </div>
+
+            <div className="movie-director">
+              <span className="label">Director: </span>
+              <Link to={`/directors/${movie.Director.Name}`}>
+                <Button variant="link">{movie.Director.Name}</Button>
+              </Link>
+            </div>
+
+            <div className="movie-genre">
+              <span className="label">Genre: </span>
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <Button variant="link">{movie.Genre.Name}</Button>
+              </Link>
+            </div>
+
+            <div className="movie-description">
+              <span className="label">Description: </span>
+              <span className="value">{movie.Description} </span>
+            </div>
+
+            <Button className="back-button" onClick={() => { onBackClick(null); }}>Back</Button>
           </Col>
         </Row>
-
-        <Row className="movie-description">
-          <Col className="description">Description: </Col>
-        </Row>
-        <Row>
-          <Col className="value">{movie.Description} </Col>
-        </Row>
-
-        <Row className="movie-director">
-          <Col className="director">Director: </Col>
-          <Col className="value">
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant="link">{movie.Director.Name}</Button>
-            </Link>
-          </Col>
-        </Row>
-
-
-        <Row className="movie-genre">
-          <Col className="genre">Genre: </Col>
-          <Col className="value">
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <Button variant="link">{movie.Genre.Name}</Button>
-            </Link>
-          </Col>
-        </Row>
-        <Button className="movie-button" onClick={() => { onBackClick(null); }}>Back</Button>
       </Container >
     );
   }
