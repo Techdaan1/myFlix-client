@@ -37692,8 +37692,7 @@ class MovieCard extends _reactDefault.default.Component {
 MovieCard.propTypes = {
     movie: _propTypesDefault.default.shape({
         Title: _propTypesDefault.default.string.isRequired
-    }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    }).isRequired
 };
 
   $parcel$ReactRefreshHelpers$4249.postlude(module);
@@ -40016,7 +40015,7 @@ var _reactBootstrap = require("React-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 class MovieView extends _reactDefault.default.Component {
     render() {
-        const { movie  } = this.props;
+        const { movie , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/movie-view/movie-view.jsx",
@@ -40107,6 +40106,17 @@ class MovieView extends _reactDefault.default.Component {
                                         __self: this,
                                         children: "Genre"
                                     })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(Button, {
+                                    onClick: ()=>{
+                                        onBackClick(null);
+                                    },
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 28
+                                    },
+                                    __self: this,
+                                    children: "Back"
                                 })
                             ]
                         })
@@ -40116,6 +40126,15 @@ class MovieView extends _reactDefault.default.Component {
         }));
     }
 }
+MovieView.prototype = {
+    movie: _propTypesDefault.default.shape({
+        Title: _propTypesDefault.default.string.isRequired,
+        Descripton: _propTypesDefault.default.string,
+        ImagePath: _propTypesDefault.default.string.isRequired,
+        Genre: _propTypesDefault.default.array,
+        Director: _propTypesDefault.default.array
+    }).isRequired
+};
 
   $parcel$ReactRefreshHelpers$3741.postlude(module);
 } finally {
