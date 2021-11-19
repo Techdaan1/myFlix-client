@@ -40087,7 +40087,7 @@ class MovieView extends _reactDefault.default.Component {
                                             lineNumber: 23
                                         },
                                         __self: this,
-                                        children: "Director"
+                                        children: movie.Director.Name
                                     })
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
@@ -40104,7 +40104,7 @@ class MovieView extends _reactDefault.default.Component {
                                             lineNumber: 26
                                         },
                                         __self: this,
-                                        children: "Genre"
+                                        children: movie.Genre.Name
                                     })
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(Button, {
