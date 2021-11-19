@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Row, Col, Card } from 'React-bootstrap';
 
@@ -10,25 +11,60 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Container>
-        <Row className="movie-view">
+
+      <Container className="movie-container">
+        <Row className="movie-title">
+          <Col className="title">Title: </Col>
+          <Col className="value">{movie.Title}</Col>
+        </Row>
+
+        <Row className="movie-poster">
           <Col>
-            <Card>
-              <Card.Body>
-                <Card.Img className="movie-poster" src={movie.ImagePath} />
-                <Card.Title>{movie.Title}</Card.Title>
-                <Card.Text>{movie.Description}</Card.Text>
-                <Link to={`/directors/${movie.Director.Name}`}>
-                  <Button variant="link">Director</Button>
-                </Link>
-                <Link to={`/genres/${movie.Genre.Name}`}>
-                  <Button variant="link">Genre</Button>
-                </Link>
-              </Card.Body>
-            </Card>
+            <img src={movie.ImagePath} crossOrigin="true" />
           </Col>
         </Row>
-      </Container>
+
+        <Row className="movie-description">
+          <Col className="description">Description: </Col>
+        </Row>
+        <Row>
+          <Col className="value">{movie.Description} </Col>
+        </Row>
+
+        <Row className="movie-director">
+          <Col className="director">Director: </Col>
+          <Col className="value">
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant="link">{movie.Director.Name}</Button>
+            </Link>
+          </Col>
+        </Row>
+
+
+        <Row className="movie-genre">
+          <Col className="genre">Genre: </Col>
+          <Col className="value">
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant="link">{movie.Genre.Name}</Button>
+            </Link>
+          </Col>
+        </Row>
+        <Button className="movie-button" onClick={() => { onBackClick(null); }}>Back</Button>
+      </Container >
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired
+    }),
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired
+};
