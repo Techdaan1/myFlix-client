@@ -9,6 +9,10 @@ import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
+  componentDidMount() {
+    document.addEventListener("keypress", this.keypressCallback);
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
 
@@ -18,7 +22,7 @@ export class MovieView extends React.Component {
         <Row className="justify-content-md-center">
           <Col>
             <div className="movie-poster">
-              <img src={movie.ImagePath} roundedCircle />
+              <img src={movie.ImagePath} crossOrigin="true" />
             </div>
 
             <div className="movie-title">
@@ -28,14 +32,14 @@ export class MovieView extends React.Component {
 
             <div className="movie-director">
               <span className="label">Director: </span>
-              <Link to={`/directors/${movie.Director.Name}`}>
+              <Link to={`/ directors / ${movie.Director.Name} `}>
                 <Button variant="link">{movie.Director.Name}</Button>
               </Link>
             </div>
 
             <div className="movie-genre">
               <span className="label">Genre: </span>
-              <Link to={`/genres/${movie.Genre.Name}`}>
+              <Link to={`/ genres / ${movie.Genre.Name} `}>
                 <Button variant="link">{movie.Genre.Name}</Button>
               </Link>
             </div>
@@ -52,17 +56,3 @@ export class MovieView extends React.Component {
     );
   }
 }
-
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired
-    }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired
-    }),
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired
-};
