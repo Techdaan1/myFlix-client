@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Container, Row, Col, CardGroup, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, CardGroup, Button, Card } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
-import './movie-card.scss';
+import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
   render() {
@@ -22,7 +22,7 @@ export class MovieCard extends React.Component {
                   <Card.Title>{movie.Title}</Card.Title>
                   <Card.Text>{movie.Description}</Card.Text>
                   <Link to={`/movies/${movie._id}`}>
-                    <Button variant="link">Open</Button>
+                    <Button variant="primary">Open</Button>
                   </Link>
                 </Card.Body>
               </Card>
@@ -33,11 +33,3 @@ export class MovieCard extends React.Component {
     );
   }
 }
-
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired
-};
