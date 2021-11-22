@@ -6,8 +6,32 @@ import { Container, Row, Col, Button, Card } from "React-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./movie-view.scss";
+import axios from "axios";
 
 export class MovieView extends React.Component {
+  addFavoriteMovie = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+    const { movie } = this.props;
+
+    axios
+      .post(
+        `https://myflix-application-2021.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        alert(`Movie added to Favorites`);
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   render() {
     const { movie, onBackClick } = this.props;
 
@@ -57,3 +81,12 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.propTypes = {
+  movies: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
