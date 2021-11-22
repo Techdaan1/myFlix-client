@@ -1,28 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Container, Row, Col, Button, Card } from 'React-bootstrap';
+import { Container, Row, Col, Button, Card } from "React-bootstrap";
 
 import { Link } from "react-router-dom";
 
-import './movie-view.scss';
+import "./movie-view.scss";
 
 export class MovieView extends React.Component {
-
-  componentDidMount() {
-    document.addEventListener("keypress", this.keypressCallback);
-  }
-
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-
       <Container className="movie-container">
         <Row className="justify-content-md-center">
           <Col>
             <div className="movie-poster">
-              <img src={movie.ImagePath} crossOrigin="true" />
+              <img src={movie.ImagePath} />
             </div>
 
             <div className="movie-title">
@@ -49,10 +43,17 @@ export class MovieView extends React.Component {
               <span className="value">{movie.Description} </span>
             </div>
 
-            <Button className="back-button" onClick={() => { onBackClick(null); }}>Back</Button>
+            <Button
+              className="back-button"
+              onClick={() => {
+                onBackClick(null);
+              }}
+            >
+              Back
+            </Button>
           </Col>
         </Row>
-      </Container >
+      </Container>
     );
   }
 }
