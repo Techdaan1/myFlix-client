@@ -1,32 +1,36 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, ButtonGroupProps } from "react-bootstrap";
 
-import './genre-view.scss';
+import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Container>
-        <Row>
-          <Col>
-            <div className="genre-view">
-              <div className="genre-title">
-                <span className="label">Name: </span>
-                <span className="value">{movie.Genre.Name}</span>
-              </div>
+      <Container className="genre-container">
+        <div className="genre-view">
+          <div className="genre-title">
+            <span className="label">Genre: </span>
+            <span className="value">{movie.Genre.Name}</span>
+          </div>
 
-              <div className="genre-description">
-                <span className="label">Description: </span>
-                <span className="value">{movie.Genre.Description}</span>
-              </div>
+          <div className="genre-description">
+            <span className="label">Description: </span>
+            <span className="value">{movie.Genre.Description}</span>
+          </div>
 
-              <button onClick={() => { onBackClick(null); }}>Back</button>
-            </div>
-          </Col>
-        </Row>
+          <button
+            variant="success"
+            onClick={() => {
+              onBackClick(null);
+            }}
+          >
+            Back
+          </button>
+        </div>
       </Container>
     );
   }
