@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
 
-import './profile-view.scss';
+import "./profile-view.scss";
 
 export class ProfileView extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -59,17 +59,19 @@ export class ProfileView extends React.Component {
     const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    axios.put(`https://myflix-application-2021.herokuapp.com//users/${Username}`,
-      {
-        Username: this.state.Username,
-        Password: this.state.Password,
-        Email: this.state.Email,
-        Birthday: this.state.Birthday,
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    axios
+      .put(
+        `https://myflix-application-2021.herokuapp.com//users/${Username}`,
+        {
+          Username: this.state.Username,
+          Password: this.state.Password,
+          Email: this.state.Email,
+          Birthday: this.state.Birthday,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         this.setState({
           Username: response.data.Username,
@@ -96,11 +98,13 @@ export class ProfileView extends React.Component {
     const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    axios.delete(`https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    axios
+      .delete(
+        `https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         console.log(response);
         alert("Movie is removed!");
@@ -172,10 +176,18 @@ export class ProfileView extends React.Component {
               <Card.Body>
                 <Card.Title>My profile information</Card.Title>
                 <Listgroup className="profile-info">
-                  <ListGroup.Item className="label">Username: {Username} </ListGroup.Item>
-                  <ListGroup.Item className="label">Password: *** </ListGroup.Item>
-                  <ListGroup.Item clasName="label">Email: {Email} </ListGroup.Item>
-                  <ListGroup.Item className="label">Birthday: {Birthday} </ListGroup.Item>
+                  <ListGroup.Item className="label">
+                    Username: {Username}{" "}
+                  </ListGroup.Item>
+                  <ListGroup.Item className="label">
+                    Password: ***{" "}
+                  </ListGroup.Item>
+                  <ListGroup.Item clasName="label">
+                    Email: {Email}{" "}
+                  </ListGroup.Item>
+                  <ListGroup.Item className="label">
+                    Birthday: {Birthday}{" "}
+                  </ListGroup.Item>
                 </Listgroup>
               </Card.Body>
             </Card>
