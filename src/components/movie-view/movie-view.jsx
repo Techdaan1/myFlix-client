@@ -9,10 +9,17 @@ import "./movie-view.scss";
 
 export class MovieView extends React.Component {
   render() {
+    /*
+      I have passed the whole movies array to this component so this component can do the find on its own.
+    */
     console.log(this.props);
     const movie = this.props.movies.find(
       (m) => m._id === this.props.match.params.movieId
     );
+
+    if (!movie) {
+      return <div>No movie found</div>;
+    }
 
     return (
       <Container className="movie-container">
@@ -60,12 +67,3 @@ export class MovieView extends React.Component {
     );
   }
 }
-
-MovieView.propTypes = {
-  movies: PropTypes.shape({
-    Title: PropTypes.string,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired,
-};
