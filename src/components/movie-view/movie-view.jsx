@@ -9,9 +9,6 @@ import "./movie-view.scss";
 
 export class MovieView extends React.Component {
   render() {
-    /*
-      I have passed the whole movies array to this component so this component can do the find on its own.
-    */
     console.log(this.props);
     const movie = this.props.movies.find(
       (m) => m._id === this.props.match.params.movieId
