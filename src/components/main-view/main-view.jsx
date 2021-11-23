@@ -64,7 +64,7 @@ export class MainView extends React.Component {
     console.log(accessToken);
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem("user)"),
+        user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
     }
@@ -104,7 +104,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, user } = this.state;
     // If movies havent loaded yet display loading state.
-    if (movies.length === 0) {
+    if (user && movies.length === 0) {
       return <div>Fetching movies from DB....</div>;
     }
     return (
@@ -113,7 +113,6 @@ export class MainView extends React.Component {
           <Row>
             {/* I think the link below should be in its own component. */}
             <Route
-              path="/"
               exact
               path="/"
               render={() =>
