@@ -50,7 +50,7 @@ export class NavbarView extends React.Component {
             </NavLink>
 
             <NavLink to={profile} className="nav-link">
-              Profile
+              My profile
             </NavLink>
 
             <NavLink to={"/"} onClick={this.onLoggedOut} className="logout">
