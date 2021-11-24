@@ -132,6 +132,10 @@ export class MainView extends React.Component {
               render={(props) => <DirectorView {...props} movies={movies} />}
             />
             <Route
+              path="/genres/:name"
+              render={(props) => <GenreView {...props} movies={movies} />}
+            />
+            <Route
               path="/users/:username"
               render={(props) => (
                 <ProfileView {...props} movies={movies} user={user} />
