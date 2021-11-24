@@ -46661,7 +46661,7 @@ class NavbarView extends _reactDefault.default.Component {
                                     lineNumber: 52
                                 },
                                 __self: this,
-                                children: "Profile"
+                                children: "My profile"
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.NavLink, {
                                 to: "/",
