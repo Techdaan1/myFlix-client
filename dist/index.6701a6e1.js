@@ -45475,7 +45475,7 @@ class DirectorView extends _reactDefault.default.Component {
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "name",
+                                className: "label",
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
                                     lineNumber: 18
@@ -45503,7 +45503,7 @@ class DirectorView extends _reactDefault.default.Component {
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "bio",
+                                className: "label",
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
                                     lineNumber: 23
@@ -45531,7 +45531,7 @@ class DirectorView extends _reactDefault.default.Component {
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                className: "bio",
+                                className: "label",
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
                                     lineNumber: 28
@@ -45611,7 +45611,7 @@ class GenreView extends _reactDefault.default.Component {
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "genre-title",
+                        className: "genre-name",
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
                             lineNumber: 17
