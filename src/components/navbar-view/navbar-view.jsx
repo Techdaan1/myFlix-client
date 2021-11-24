@@ -28,11 +28,10 @@ export class NavbarView extends React.Component {
 
     return (
       <Navbar
+        className="Navbar-item"
         collapseOnSelect
         expand="lg"
         variant="light"
-        fixed="top"
-        className="navbar"
         bg="bg-secondary"
       >
         <Container fluid>
