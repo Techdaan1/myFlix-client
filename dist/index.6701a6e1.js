@@ -23013,17 +23013,29 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "navbar",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 112
                     },
-                    __self: this
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
+                        user: user,
+                        style: {
+                            marginBottom: "5rem"
+                        },
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 113
+                        },
+                        __self: this
+                    })
                 }),
                 user ? /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 114
+                        lineNumber: 116
                     },
                     __self: this,
                     children: [
@@ -23040,7 +23052,7 @@ class MainView extends _reactDefault.default.Component {
                             ,
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 116
+                                lineNumber: 118
                             },
                             __self: this
                         }),
@@ -23053,7 +23065,7 @@ class MainView extends _reactDefault.default.Component {
                             ,
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 127
+                                lineNumber: 129
                             },
                             __self: this
                         }),
@@ -23066,7 +23078,7 @@ class MainView extends _reactDefault.default.Component {
                             ,
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 131
+                                lineNumber: 133
                             },
                             __self: this
                         }),
@@ -23079,7 +23091,7 @@ class MainView extends _reactDefault.default.Component {
                             ,
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 135
+                                lineNumber: 137
                             },
                             __self: this
                         }),
@@ -23093,7 +23105,7 @@ class MainView extends _reactDefault.default.Component {
                             ,
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 139
+                                lineNumber: 141
                             },
                             __self: this
                         })
@@ -23101,7 +23113,7 @@ class MainView extends _reactDefault.default.Component {
                 }) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 147
+                        lineNumber: 149
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
@@ -23120,7 +23132,7 @@ class MainView extends _reactDefault.default.Component {
                         ,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 149
+                            lineNumber: 151
                         },
                         __self: this
                     })
@@ -46587,11 +46599,10 @@ class NavbarView extends _reactDefault.default.Component {
         const profile = `/users/${user}`;
         if (!user) return null;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
+            className: "Navbar-item",
             collapseOnSelect: true,
             expand: "lg",
             variant: "light",
-            fixed: "top",
-            className: "navbar",
             bg: "bg-secondary",
             __source: {
                 fileName: "src/components/navbar-view/navbar-view.jsx",
@@ -46602,7 +46613,7 @@ class NavbarView extends _reactDefault.default.Component {
                 fluid: true,
                 __source: {
                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 38
+                    lineNumber: 37
                 },
                 __self: this,
                 children: [
@@ -46610,7 +46621,7 @@ class NavbarView extends _reactDefault.default.Component {
                         href: "/",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 39
+                            lineNumber: 38
                         },
                         __self: this,
                         children: "MyFlix"
@@ -46619,7 +46630,7 @@ class NavbarView extends _reactDefault.default.Component {
                         "aria-controls": "navbarScroll",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 40
+                            lineNumber: 39
                         },
                         __self: this
                     }),
@@ -46627,7 +46638,7 @@ class NavbarView extends _reactDefault.default.Component {
                         id: "navbarScroll",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 40
                         },
                         __self: this,
                         children: [
@@ -46639,7 +46650,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 navbarScroll: true,
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 42
+                                    lineNumber: 41
                                 },
                                 __self: this
                             }),
@@ -46648,7 +46659,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 48
+                                    lineNumber: 47
                                 },
                                 __self: this,
                                 children: "Home"
@@ -46658,7 +46669,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 52
+                                    lineNumber: 51
                                 },
                                 __self: this,
                                 children: "My profile"
@@ -46669,7 +46680,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "logout",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 56
+                                    lineNumber: 55
                                 },
                                 __self: this,
                                 children: "Log Out"
@@ -46687,6 +46698,6 @@ class NavbarView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","./navbar-view.scss":"eDP1C","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp"}],"eDP1C":[function() {},{}],"jUTZ8":[function() {},{}]},["asPf7","cM83J","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","./navbar-view.scss":"eDP1C","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp","react/jsx-runtime":"8xIwr"}],"eDP1C":[function() {},{}],"jUTZ8":[function() {},{}]},["asPf7","cM83J","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
