@@ -45580,19 +45580,20 @@ var _reactBootstrap = require("react-bootstrap");
 var _genreViewScss = require("./genre-view.scss");
 class GenreView extends _reactDefault.default.Component {
     render() {
-        const { movie , onBackClick  } = this.props;
+        const genre = this.props.movies.find((m)=>m.Genre.Name === this.props.match.params.name
+        ).Genre;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             className: "genre-container",
             __source: {
                 fileName: "src/components/genre-view/genre-view.jsx",
-                lineNumber: 13
+                lineNumber: 15
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 className: "genre-view",
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 14
+                    lineNumber: 16
                 },
                 __self: this,
                 children: [
@@ -45600,7 +45601,7 @@ class GenreView extends _reactDefault.default.Component {
                         className: "genre-title",
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 15
+                            lineNumber: 17
                         },
                         __self: this,
                         children: [
@@ -45608,7 +45609,7 @@ class GenreView extends _reactDefault.default.Component {
                                 className: "label",
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 16
+                                    lineNumber: 18
                                 },
                                 __self: this,
                                 children: "Genre: "
@@ -45617,10 +45618,10 @@ class GenreView extends _reactDefault.default.Component {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 17
+                                    lineNumber: 19
                                 },
                                 __self: this,
-                                children: movie.Genre.Name
+                                children: genre.Name
                             })
                         ]
                     }),
@@ -45628,7 +45629,7 @@ class GenreView extends _reactDefault.default.Component {
                         className: "genre-description",
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 20
+                            lineNumber: 22
                         },
                         __self: this,
                         children: [
@@ -45636,7 +45637,7 @@ class GenreView extends _reactDefault.default.Component {
                                 className: "label",
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 21
+                                    lineNumber: 23
                                 },
                                 __self: this,
                                 children: "Description: "
@@ -45645,21 +45646,21 @@ class GenreView extends _reactDefault.default.Component {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 22
+                                    lineNumber: 24
                                 },
                                 __self: this,
-                                children: movie.Genre.Description
+                                children: genre.Description
                             })
                         ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "success",
                         onClick: ()=>{
-                            onBackClick(null);
+                            this.props.history.goBack();
                         },
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 25
+                            lineNumber: 27
                         },
                         __self: this,
                         children: "Back"
