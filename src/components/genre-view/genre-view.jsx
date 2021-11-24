@@ -14,7 +14,7 @@ export class GenreView extends React.Component {
     return (
       <Container className="genre-container">
         <div className="genre-view">
-          <div className="genre-title">
+          <div className="genre-name">
             <span className="label">Genre: </span>
             <span className="value">{genre.Name}</span>
           </div>
