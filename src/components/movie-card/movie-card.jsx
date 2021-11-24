@@ -17,7 +17,12 @@ export class MovieCard extends React.Component {
           <Col>
             <CardGroup>
               <Card text-center="true">
-                <Card.Img variant="top" src={movie.ImagePath} fluid="true" />
+                <Card.Img
+                  className="rounded"
+                  variant="top"
+                  src={movie.ImagePath}
+                  fluid="true"
+                />
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
                   <Card.Text>{movie.Description}</Card.Text>
