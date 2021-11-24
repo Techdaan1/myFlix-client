@@ -15,17 +15,17 @@ export class DirectorView extends React.Component {
       <Container className="director-container">
         <div className="director-view">
           <div className="director-name">
-            <span className="name">Director: </span>
+            <span className="label">Director: </span>
             <span className="value">{director.Name}</span>
           </div>
 
           <div className="director-bio">
-            <span className="bio">Bio: </span>
+            <span className="label">Bio: </span>
             <span className="value">{director.Bio}</span>
           </div>
 
           <div className="director-bio">
-            <span className="bio">Birth: </span>
+            <span className="label">Birth: </span>
             <span className="value">{director.Birth}</span>
           </div>
 
