@@ -1,35 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Container, Card, Row, Col, ButtonGroupProps } from "react-bootstrap";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
 
 import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-    const { movie, onBackClick } = this.props;
+    const genre = this.props.movies.find(
+      (m) => m.Genre.Name === this.props.match.params.name
+    ).Genre;
 
     return (
       <Container className="genre-container">
         <div className="genre-view">
           <div className="genre-title">
             <span className="label">Genre: </span>
-            <span className="value">{movie.Genre.Name}</span>
+            <span className="value">{genre.Name}</span>
           </div>
 
           <div className="genre-description">
             <span className="label">Description: </span>
-            <span className="value">{movie.Genre.Description}</span>
+            <span className="value">{genre.Description}</span>
           </div>
 
-          <button
+          <Button
             variant="success"
             onClick={() => {
-              onBackClick(null);
+              this.props.history.goBack();
             }}
           >
             Back
-          </button>
+          </Button>
         </div>
       </Container>
     );
