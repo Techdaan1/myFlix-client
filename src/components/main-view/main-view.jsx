@@ -109,6 +109,7 @@ export class MainView extends React.Component {
     }
     return (
       <Router>
+        <NavbarView />
         {user ? (
           <Row>
             {/* I think the link below should be in its own component. */}
