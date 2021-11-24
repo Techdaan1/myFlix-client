@@ -23063,6 +23063,19 @@ class MainView extends _reactDefault.default.Component {
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                        path: "/genres/:name",
+                        render: (props)=>/*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
+                                ...props,
+                                movies: movies
+                            })
+                        ,
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 134
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                         path: "/users/:username",
                         render: (props)=>/*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
                                 ...props,
@@ -23072,7 +23085,7 @@ class MainView extends _reactDefault.default.Component {
                         ,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 134
+                            lineNumber: 138
                         },
                         __self: this
                     })
@@ -23080,7 +23093,7 @@ class MainView extends _reactDefault.default.Component {
             }) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 142
+                    lineNumber: 146
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
@@ -23099,7 +23112,7 @@ class MainView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 144
+                        lineNumber: 148
                     },
                     __self: this
                 })
