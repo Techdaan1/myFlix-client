@@ -8,10 +8,43 @@ import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
 export class MovieView extends React.Component {
+  addToFavs() {
+    const Username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    const { movie } = this.props;
+
+    axios
+      .post(
+        `https://https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log(movie._id);
+        alert("Movie added to favorite list");
+        this.componentDidMount();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  componentDidMount() {
+    document.addEventListener("keypress", this.keypressCallback);
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    this.setState({
+      user: null,
+    });
+    window.open("/", "_self");
+  }
+
   render() {
-    /*
-      I have passed the whole movies array to this component so this component can do the find on its own.
-    */
     console.log(this.props);
     const movie = this.props.movies.find(
       (m) => m._id === this.props.match.params.movieId
@@ -63,6 +96,14 @@ export class MovieView extends React.Component {
                       }}
                     >
                       Back
+                    </Button>
+                    <Button
+                      className="float-right"
+                      onClick={() => {
+                        this.addToFavs();
+                      }}
+                    >
+                      Add to Favorites
                     </Button>
                   </div>
                 </Card.Body>
