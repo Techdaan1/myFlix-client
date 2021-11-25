@@ -16,7 +16,7 @@ export class MovieCard extends React.Component {
         <Row>
           <Col>
             <CardGroup>
-              <Card text-center="true">
+              <Card text-center="true" style={{ width: "30rem" }}>
                 <Card.Img
                   className="rounded"
                   variant="top"
