@@ -16,22 +16,28 @@ export class MovieCard extends React.Component {
         <Row>
           <Col>
             <CardGroup>
-              <Card text-center="true">
-                <Card.Img
-                  className="rounded"
-                  variant="top"
-                  src={movie.ImagePath}
-                  fluid="true"
-                />
+              <Card text-center="true" style={{ width: "30rem" }}>
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>{movie.Description}</Card.Text>
-                  <Link to={`/movies/${movie._id}`}>
-                    <Button variant="primary">Open</Button>
-                  </Link>
+                  <Card.Img
+                    className="rounded"
+                    variant="top"
+                    src={movie.ImagePath}
+                    fluid="true"
+                  />
+                  <br />
+                  <br />
+                  <div className="text-center">
+                    <Link to={`/movies/${movie._id}`}>
+                      <Button className="btn btn-default" variant="primary">
+                        Movie information
+                      </Button>
+                    </Link>
+                  </div>
                 </Card.Body>
               </Card>
             </CardGroup>
+            <br />
           </Col>
         </Row>
       </Container>

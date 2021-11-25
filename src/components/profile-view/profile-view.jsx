@@ -3,7 +3,15 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Form,
+  Button,
+} from "react-bootstrap";
 
 import "./profile-view.scss";
 
@@ -121,9 +129,12 @@ export class ProfileView extends React.Component {
     const token = localStorage.getItem("token");
 
     axios
-      .delete(`https://movie-api-by-tammy.herokuapp.com/users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        `https://myflix-application-2021.herokuapp.com/users/${Username}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         console.log(response);
         alert("Profile has been deleted.");
@@ -175,29 +186,24 @@ export class ProfileView extends React.Component {
             <Card className="user-profile">
               <Card.Body>
                 <Card.Title>My profile information</Card.Title>
-                <Listgroup className="profile-info">
+                <ListGroup className="profile-info">
                   <ListGroup.Item className="label">
                     Username: {Username}{" "}
                   </ListGroup.Item>
                   <ListGroup.Item className="label">
-                    Password: ***{" "}
-                  </ListGroup.Item>
-                  <ListGroup.Item clasName="label">
                     Email: {Email}{" "}
                   </ListGroup.Item>
                   <ListGroup.Item className="label">
                     Birthday: {Birthday}{" "}
                   </ListGroup.Item>
-                </Listgroup>
+                </ListGroup>
               </Card.Body>
             </Card>
           </Col>
-        </Row>
-        <Row>
           <Col>
             <Card className="update-profile">
               <Card.Body>
-                <Card.Title>Update Profile</Card.Title>
+                <Card.Title>Update Profile information</Card.Title>
                 <Form
                   className="update-form"
                   onSubmit={(e) =>
@@ -276,14 +282,14 @@ export class ProfileView extends React.Component {
         <Card>
           <Row style={{ marginTop: "20px" }}>
             <Col>
-              <h4>{Username} Favorite Movies</h4>
+              <h4>My favorite movies</h4>
             </Col>
           </Row>
           <Row>
             <Col>
               <Card.Body>
                 {FavoriteMovies.length === 0 && (
-                  <div className="text-center">No Favorite Movie</div>
+                  <div className="text-center">No favorite movies yet</div>
                 )}
                 <Row className="favorite-container">
                   {FavoriteMovies.length > 0 &&

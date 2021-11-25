@@ -42,20 +42,21 @@ export function RegistrationView(props) {
   return (
     <Container>
       <Row>
+        <Col></Col>
         <Col>
           <CardGroup>
             <Card>
               <Card.Body>
                 <Card.Title>Please register to MyFlix</Card.Title>
                 <Form>
-                  <Form.Group>
+                  <Form.Group controlId="formUsername">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       required
-                      placeholder="Enter username"
+                      placeholder="Set username"
                     />
                   </Form.Group>
 
@@ -104,6 +105,7 @@ export function RegistrationView(props) {
             </Card>
           </CardGroup>
         </Col>
+        <Col></Col>
       </Row>
     </Container>
   );
