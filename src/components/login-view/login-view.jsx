@@ -55,6 +55,14 @@ export function LoginView(props) {
               <Button variant="warning" type="submit" onClick={handleSubmit}>
                 Submit
               </Button>
+              <Button
+                variant="warning"
+                type="Create account"
+                onClick={handleSubmit}
+                className="float-right"
+              >
+                Create account
+              </Button>
             </Form>
           </Card>
         </Col>
