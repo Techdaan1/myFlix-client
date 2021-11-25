@@ -27,41 +27,45 @@ export class MovieView extends React.Component {
           <Col>
             <CardGroup>
               <Card text-center="true">
-                <div className="movie-poster fluid">
-                  {movie.ImagePath && <img src={movie.ImagePath} />}
-                </div>
+                <Card.Body>
+                  <Card.Img
+                    xs={6}
+                    md={4}
+                    className="movie-poster rounded"
+                    variant="top"
+                    src={movie.ImagePath}
+                    fluid="true"
+                  />
 
-                <div className="movie-title">
-                  <span className="label">Title: </span>
-                  <span className="value">{movie.Title}</span>
-                </div>
+                  <div className="movie-title">
+                    <span className="value">{movie.Title}</span>
+                  </div>
 
-                <div className="movie-director">
-                  <span className="label">Director: </span>
-                  <Link to={`/directors/${movie.Director.Name}`}>
-                    <Button variant="link">{movie.Director.Name}</Button>
-                  </Link>
-                </div>
+                  <div className="movie-director-genre">
+                    <span className="label">Director: </span>
+                    <Link to={`/directors/${movie.Director.Name}`}>
+                      <Button variant="link">{movie.Director.Name}</Button>
+                    </Link>
+                    <span className="label">Genre: </span>
+                    <Link to={`/genres/${movie.Genre.Name}`}>
+                      <Button variant="link">{movie.Genre.Name}</Button>
+                    </Link>
+                  </div>
 
-                <div className="movie-genre">
-                  <span className="label">Genre: </span>
-                  <Link to={`/genres/${movie.Genre.Name}`}>
-                    <Button variant="link">{movie.Genre.Name}</Button>
-                  </Link>
-                </div>
-
-                <div className="movie-description">
-                  <span className="label">Description: </span>
-                  <span className="value">{movie.Description} </span>
-                </div>
-                <Button
-                  className="back-button mb-2"
-                  onClick={() => {
-                    this.props.history.goBack();
-                  }}
-                >
-                  Back
-                </Button>
+                  <div className="movie-description">
+                    <span className="value">{movie.Description} </span>
+                  </div>
+                  <div>
+                    <Button
+                      className="back-button mb-2"
+                      onClick={() => {
+                        this.props.history.goBack();
+                      }}
+                    >
+                      Back
+                    </Button>
+                  </div>
+                </Card.Body>
               </Card>
             </CardGroup>
           </Col>
