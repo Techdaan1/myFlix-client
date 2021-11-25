@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 
 import { Container, Row, Col, Button, Card, CardGroup } from "React-bootstrap";
@@ -15,7 +16,7 @@ export class MovieView extends React.Component {
 
     axios
       .post(
-        `https://https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
