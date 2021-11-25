@@ -13,7 +13,7 @@ export class MovieView extends React.Component {
     const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     const { movie } = this.props;
-
+    console.log(movie);
     axios
       .post(
         `https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
