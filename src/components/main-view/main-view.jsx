@@ -144,6 +144,17 @@ export class MainView extends React.Component {
                 <ProfileView {...props} movies={movies} user={user} />
               )}
             />
+            <Route
+              path="/register"
+              render={() => {
+                if (user) return <Redirect to="/" />;
+                return (
+                  <div>
+                    <RegistrationView />
+                  </div>
+                );
+              }}
+            />
           </Row>
         ) : (
           <Row>
@@ -153,9 +164,12 @@ export class MainView extends React.Component {
               render={() => (
                 <>
                   {" "}
-                  <LoginView
-                    onLoggedIn={(user) => this.onLoggedIn(user)}
-                  />{" "}
+                  <Col>
+                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />{" "}
+                  </Col>
+                  <Col>
+                    <RegistrationView />
+                  </Col>
                 </>
               )}
             />
