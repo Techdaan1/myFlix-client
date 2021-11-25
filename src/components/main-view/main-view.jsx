@@ -153,8 +153,9 @@ export class MainView extends React.Component {
               render={() => (
                 <>
                   {" "}
-                  <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                  <RegistrationView />{" "}
+                  <LoginView
+                    onLoggedIn={(user) => this.onLoggedIn(user)}
+                  />{" "}
                 </>
               )}
             />
