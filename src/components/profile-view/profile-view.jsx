@@ -129,9 +129,12 @@ export class ProfileView extends React.Component {
     const token = localStorage.getItem("token");
 
     axios
-      .delete(`https://movie-api-by-tammy.herokuapp.com/users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        `https://myflix-application-2021.herokuapp.com/users/${Username}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         console.log(response);
         alert("Profile has been deleted.");
@@ -186,9 +189,6 @@ export class ProfileView extends React.Component {
                 <ListGroup className="profile-info">
                   <ListGroup.Item className="label">
                     Username: {Username}{" "}
-                  </ListGroup.Item>
-                  <ListGroup.Item className="label">
-                    Password: ***{" "}
                   </ListGroup.Item>
                   <ListGroup.Item className="label">
                     Email: {Email}{" "}
