@@ -57,6 +57,7 @@ export class MovieView extends React.Component {
 
     return (
       <Container className="movie-container">
+        <br />
         <Row className="justify-content-md-center">
           <Col className="col-8 center">
             <CardGroup>
@@ -119,6 +120,7 @@ export class MovieView extends React.Component {
             </CardGroup>
           </Col>
         </Row>
+        <br />
       </Container>
     );
   }
