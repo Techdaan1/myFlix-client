@@ -29,7 +29,12 @@ export class NavbarView extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" variant="light">
         <Container className="navbar-container">
-          <Navbar.Brand className="app-name">MyFlix</Navbar.Brand>
+          <Navbar.Brand
+            to={home}
+            className="app-name text-danger font-weight-bold"
+          >
+            MyFlix
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav

@@ -43,70 +43,63 @@ export function RegistrationView(props) {
     <Container>
       <Row>
         <Col></Col>
-        <Col>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Please register to MyFlix</Card.Title>
-                <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="Set username"
-                    />
-                  </Form.Group>
+        <Card>
+          <Card.Body>
+            <Card.Title>Please register to MyFlix</Card.Title>
+            <Form>
+              <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Set username"
+                />
+              </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="Your password must be 8 or more characters"
-                      minlenght="8"
-                      required
-                    />
-                  </Form.Group>
+              <Form.Group>
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Your password must be 8 or more characters"
+                  minlenght="8"
+                  required
+                />
+              </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Email: </Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email address"
-                    />
-                  </Form.Group>
+              <Form.Group>
+                <Form.Label>Email: </Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                />
+              </Form.Group>
 
-                  <Form.Group>
-                    <Form.Label>Birthday: </Form.Label>
-                    <Form.Control
-                      type="date"
-                      value={birthday}
-                      onChange={(e) => setBirthday(e.target.value)}
-                      placeholder="Enter your birthday"
-                    />
-                  </Form.Group>
-
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Create Account
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
+              <Form.Group>
+                <Form.Label>Birthday: </Form.Label>
+                <Form.Control
+                  type="date"
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  placeholder="Enter your birthday"
+                />
+              </Form.Group>
+              <br />
+              <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Create Account
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
         <Col></Col>
       </Row>
+      <br />
     </Container>
   );
 }
