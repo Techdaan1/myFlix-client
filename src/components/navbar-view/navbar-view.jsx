@@ -27,8 +27,14 @@ export class NavbarView extends React.Component {
     if (!user) return null;
 
     return (
-      <Navbar collapseOnSelect expand="lg" variant="light">
-        <Container className="navbar-container">
+      <div>
+        <br />
+        <Navbar
+          className="navbar fixed-top rounded border navbar-expand-lg fluid"
+          collapseOnSelect
+          expand="lg"
+          variant="light"
+        >
           <Navbar.Brand
             to={home}
             className="app-name text-danger font-weight-bold"
@@ -55,8 +61,8 @@ export class NavbarView extends React.Component {
               Log Out
             </NavLink>
           </Navbar.Collapse>
-        </Container>
-      </Navbar>
+        </Navbar>
+      </div>
     );
   }
 }

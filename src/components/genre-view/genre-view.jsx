@@ -13,6 +13,7 @@ export class GenreView extends React.Component {
 
     return (
       <Container className="genre-container">
+        <br />
         <Card>
           <Card.Body>
             <div className="genre-view">

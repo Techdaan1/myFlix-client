@@ -111,9 +111,9 @@ export class MainView extends React.Component {
     }
     return (
       <Router>
-        <div className="navbar">
-          <NavbarView user={user} style={{ marginBottom: "5rem" }} />
-        </div>
+        <NavbarView user={user} />
+        <br />
+
         {user ? (
           <Row className="fluid">
             {/* I think the link below should be in its own component. */}

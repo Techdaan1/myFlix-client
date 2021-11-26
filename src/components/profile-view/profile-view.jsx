@@ -181,6 +181,7 @@ export class ProfileView extends React.Component {
 
     return (
       <Container className="profile-view">
+        <br />
         <Row>
           <Col>
             <Card className="user-profile">

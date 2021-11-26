@@ -13,10 +13,15 @@ export class MovieCard extends React.Component {
 
     return (
       <Container>
+        <br />
         <Row>
           <Col>
             <CardGroup>
-              <Card text-center="true" style={{ width: "30rem" }}>
+              <Card
+                className="rounded-lg"
+                text-center="true"
+                style={{ width: "30rem" }}
+              >
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
                   <Card.Img

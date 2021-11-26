@@ -13,6 +13,7 @@ export class DirectorView extends React.Component {
 
     return (
       <Container className="director-container">
+        <br />
         <Card>
           <Card.Body>
             <div className="director-view">
