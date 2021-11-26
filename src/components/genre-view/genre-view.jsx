@@ -13,26 +13,34 @@ export class GenreView extends React.Component {
 
     return (
       <Container className="genre-container">
-        <div className="genre-view">
-          <div className="genre-name">
-            <span className="label">Genre: </span>
-            <span className="value">{genre.Name}</span>
-          </div>
-
-          <div className="genre-description">
-            <span className="label">Description: </span>
-            <span className="value">{genre.Description}</span>
-          </div>
-
-          <Button
-            variant="success"
-            onClick={() => {
-              this.props.history.goBack();
-            }}
-          >
-            Back
-          </Button>
-        </div>
+        <Card>
+          <Card.Body>
+            <div className="genre-view">
+              <div className="genre-name font-weight-bold">
+                <span className="label">Genre: </span>
+                <span className="value">{genre.Name}</span>
+              </div>
+              <br />
+              <div className="genre-description">
+                <span className="label">Description: </span>
+                <span className="value">{genre.Description}</span>
+              </div>
+              <br />
+              <Button
+                variant="primary"
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
+              >
+                Back
+              </Button>
+              <br />
+              <br />
+            </div>
+          </Card.Body>
+        </Card>
+        <br />
+        <br />
       </Container>
     );
   }
