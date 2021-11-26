@@ -188,16 +188,63 @@ export class ProfileView extends React.Component {
                 <Card.Title>My profile information</Card.Title>
                 <ListGroup className="profile-info">
                   <ListGroup.Item className="label">
-                    Username: {Username}{" "}
+                    User: {Username}{" "}
                   </ListGroup.Item>
                   <ListGroup.Item className="label">
                     Email: {Email}{" "}
                   </ListGroup.Item>
-                  <ListGroup.Item className="label">
-                    Birthday: {Birthday}{" "}
-                  </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
+            </Card>
+
+            <br />
+            <Card>
+              <Row>
+                <Card.Body>
+                  <Card.Title>My favorite movies</Card.Title>
+                  {FavoriteMovies.length === 0 && (
+                    <div>No favorite movies yet</div>
+                  )}
+                  <Col className="favorite-container">
+                    {FavoriteMovies.length > 0 &&
+                      movies.map((movie) => {
+                        if (
+                          movie._id ===
+                          FavoriteMovies.find((fav) => fav === movie._id)
+                        ) {
+                          return (
+                            <Card
+                              className="favorite-movie card-content"
+                              key={movie._id}
+                            >
+                              <Card.Img
+                                className="fav-poster"
+                                variant="top"
+                                src={movie.ImagePath}
+                              />
+                              <Card.Body>
+                                <Card.Title className="movie_title">
+                                  {movie.Title}
+                                </Card.Title>
+
+                                <Button
+                                  size="sm"
+                                  variant="danger"
+                                  value={movie._id}
+                                  onClick={(e) =>
+                                    this.onRemoveFavorite(e, movie)
+                                  }
+                                >
+                                  Remove
+                                </Button>
+                              </Card.Body>
+                            </Card>
+                          );
+                        }
+                      })}
+                  </Col>
+                </Card.Body>
+              </Row>
             </Card>
           </Col>
           <Col>
@@ -280,53 +327,6 @@ export class ProfileView extends React.Component {
           </Col>
         </Row>
         <br />
-
-        <Card>
-          <Row>
-            <Card.Body>
-              <h4>My favorite movies</h4>
-              {FavoriteMovies.length === 0 && (
-                <div className="text-center">No favorite movies yet</div>
-              )}
-              <Col className="favorite-container">
-                {FavoriteMovies.length > 0 &&
-                  movies.map((movie) => {
-                    if (
-                      movie._id ===
-                      FavoriteMovies.find((fav) => fav === movie._id)
-                    ) {
-                      return (
-                        <Card
-                          className="favorite-movie card-content"
-                          key={movie._id}
-                        >
-                          <Card.Img
-                            className="fav-poster"
-                            variant="top"
-                            src={movie.ImagePath}
-                          />
-                          <Card.Body>
-                            <Card.Title className="movie_title">
-                              {movie.Title}
-                            </Card.Title>
-
-                            <Button
-                              size="sm"
-                              variant="danger"
-                              value={movie._id}
-                              onClick={(e) => this.onRemoveFavorite(e, movie)}
-                            >
-                              Remove
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      );
-                    }
-                  })}
-              </Col>
-            </Card.Body>
-          </Row>
-        </Card>
         <br />
       </Container>
     );
