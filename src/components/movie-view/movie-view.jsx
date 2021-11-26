@@ -58,55 +58,62 @@ export class MovieView extends React.Component {
     return (
       <Container className="movie-container">
         <Row className="justify-content-md-center">
-          <Col>
+          <Col className="col-8 center">
             <CardGroup>
               <Card text-center="true">
                 <Card.Body>
-                  <Card.Img
-                    xs={6}
-                    md={4}
-                    className="movie-poster rounded"
-                    variant="top"
-                    src={movie.ImagePath}
-                    fluid="true"
-                  />
+                  <Row>
+                    <Col>
+                      <Card.Img
+                        xs={10}
+                        md={4}
+                        className="movie-poster rounded img-fluid"
+                        variant="top"
+                        src={movie.ImagePath}
+                      />
+                    </Col>
+                    <Col>
+                      <div className="movie-title">
+                        <h3 className="value">{movie.Title}</h3>
+                      </div>
 
-                  <div className="movie-title">
-                    <span className="value">{movie.Title}</span>
-                  </div>
+                      <div className="movie-director-genre">
+                        <span className="label">Director: </span>
+                        <Link to={`/directors/${movie.Director.Name}`}>
+                          <Button variant="link">{movie.Director.Name}</Button>
+                        </Link>
+                      </div>
+                      <div>
+                        <span className="label">Genre: </span>
+                        <Link to={`/genres/${movie.Genre.Name}`}>
+                          <Button variant="link">{movie.Genre.Name}</Button>
+                        </Link>
+                      </div>
 
-                  <div className="movie-director-genre">
-                    <span className="label">Director: </span>
-                    <Link to={`/directors/${movie.Director.Name}`}>
-                      <Button variant="link">{movie.Director.Name}</Button>
-                    </Link>
-                    <span className="label">Genre: </span>
-                    <Link to={`/genres/${movie.Genre.Name}`}>
-                      <Button variant="link">{movie.Genre.Name}</Button>
-                    </Link>
-                  </div>
-
-                  <div className="movie-description">
-                    <span className="value">{movie.Description} </span>
-                  </div>
-                  <div>
-                    <Button
-                      className="back-button mb-2"
-                      onClick={() => {
-                        this.props.history.goBack();
-                      }}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      className="float-right"
-                      onClick={() => {
-                        this.addToFavs();
-                      }}
-                    >
-                      Add to Favorites
-                    </Button>
-                  </div>
+                      <div className="movie-description">
+                        <span className="value">{movie.Description} </span>
+                      </div>
+                      <br />
+                      <div>
+                        <Button
+                          className="back-button mb-2"
+                          onClick={() => {
+                            this.props.history.goBack();
+                          }}
+                        >
+                          Back
+                        </Button>
+                        <Button
+                          className="float-right"
+                          onClick={() => {
+                            this.addToFavs();
+                          }}
+                        >
+                          Add to Favorites
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
                 </Card.Body>
               </Card>
             </CardGroup>

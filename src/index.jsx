@@ -14,8 +14,8 @@ class MyFlixApplication extends React.Component {
 
   render() {
     return (
-      <Container className="container">
-        <MainView />
+      <Container>
+        <MainView className="bg-black" />
       </Container>
     );
   }

@@ -14,7 +14,7 @@ import { RegistrationView } from "../registration-view/registration-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavbarView } from "../navbar-view/navbar-view";
 
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 
 export class MainView extends React.Component {
   constructor() {
@@ -105,7 +105,9 @@ export class MainView extends React.Component {
     const { movies, user } = this.state;
     // If movies havent loaded yet display loading state.
     if (user && movies.length === 0) {
-      return <div>Fetching movies from DB....</div>;
+      return (
+        <div className="text-white">Fetching movies from database....</div>
+      );
     }
     return (
       <Router>
@@ -113,7 +115,7 @@ export class MainView extends React.Component {
           <NavbarView user={user} style={{ marginBottom: "5rem" }} />
         </div>
         {user ? (
-          <Row>
+          <Row className="fluid">
             {/* I think the link below should be in its own component. */}
             <Route
               exact
@@ -164,10 +166,10 @@ export class MainView extends React.Component {
               render={() => (
                 <>
                   {" "}
-                  <Col>
+                  <Col className="col-6">
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />{" "}
                   </Col>
-                  <Col>
+                  <Col className="col-6">
                     <RegistrationView />
                   </Col>
                 </>
