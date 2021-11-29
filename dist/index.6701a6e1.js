@@ -46296,18 +46296,25 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactRouterDom = require("react-router-dom");
+var _dayjs = require("dayjs");
+var _dayjsDefault = parcelHelpers.interopDefault(_dayjs);
 var _reactBootstrap = require("react-bootstrap");
 var _profileViewScss = require("./profile-view.scss");
 class ProfileView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            Username: null,
-            Password: null,
-            Email: null,
-            Birthday: null,
+            Username: "",
+            Password: "",
+            Email: "",
+            Birthday: "",
             FavoriteMovies: []
         };
+        this.LocalStorageUsername = localStorage.getItem("user");
+        //https://reactjs.org/docs/handling-events.html
+        this.setUser = this.setUser.bind(this);
+        this.editUser = this.editUser.bind(this);
+        this.onDeleteUser = this.onDeleteUser.bind(this);
     }
     componentDidMount() {
         const accessToken = localStorage.getItem("token");
@@ -46322,12 +46329,12 @@ class ProfileView extends _reactDefault.default.Component {
         window.open("/", "_self");
     }
     getUser = (token)=>{
-        const Username = localStorage.getItem("user");
-        _axiosDefault.default.get(`https://myflix-application-2021.herokuapp.com//users/${Username}`, {
+        _axiosDefault.default.get(`https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
+            console.log(response.data);
             this.setState({
                 Username: response.data.Username,
                 Password: response.data.Password,
@@ -46342,13 +46349,13 @@ class ProfileView extends _reactDefault.default.Component {
     // Allow user to edit or update profile
     editUser = (e)=>{
         e.preventDefault();
-        const Username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        _axiosDefault.default.put(`https://myflix-application-2021.herokuapp.com//users/${Username}`, {
-            Username: this.state.Username,
-            Password: this.state.Password,
-            Email: this.state.Email,
-            Birthday: this.state.Birthday
+        const { Email , Birthday , Password , Username  } = this.state;
+        _axiosDefault.default.put(`https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`, {
+            Username,
+            Password,
+            Email,
+            Birthday
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -46360,38 +46367,33 @@ class ProfileView extends _reactDefault.default.Component {
                 Email: response.data.Email,
                 Birthday: response.data.Birthday
             });
-            localStorage.setItem("user", this.state.Username);
-            const data = response.data;
-            console.log(data);
-            console.log(this.state.Username);
+            localStorage.setItem("user", response.data.Username);
             alert("Profile is updated!");
-            window.open(`/users/${Username}`, "_self");
+            //just call get user again
+            this.getUser(token);
         }).catch(function(error) {
             console.log(error);
         });
     };
     // Delete a movie from FavoriteMovies list
-    onRemoveFavorite = (e, movie)=>{
-        e.preventDefault();
-        const Username = localStorage.getItem("user");
+    onRemoveFavorite = (movie)=>{
         const token = localStorage.getItem("token");
-        _axiosDefault.default.delete(`https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`, {
+        _axiosDefault.default.delete(`https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}/movies/${movie._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             console.log(response);
             alert("Movie is removed!");
-            this.componentDidMount();
+            this.getUser(token);
         }).catch(function(error) {
             console.log(error);
         });
     };
     // Deregister
     onDeleteUser() {
-        const Username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        _axiosDefault.default.delete(`https://myflix-application-2021.herokuapp.com/users/${Username}`, {
+        _axiosDefault.default.delete(`https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -46405,80 +46407,55 @@ class ProfileView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    setUsername(value) {
-        this.setState({
-            Username: value
-        });
-        this.Username = value;
-    }
-    setPassword(value) {
-        this.setState({
-            Password: value
-        });
-        this.Password = value;
-    }
-    setEmail(value) {
-        this.setState({
-            Email: value
-        });
-        this.Email = value;
-    }
-    setBirthday(value) {
-        this.setState({
-            Birthday: value
-        });
-        this.Birthday = value;
+    setUser(e) {
+        let tempState = {
+            ...this.state,
+            [e.target.name]: e.target.value
+        }; //make copy of state;
+        this.setState(tempState);
     }
     render() {
-        const { Username , Email , Birthday , FavoriteMovies  } = this.state;
-        const { movies  } = this.props;
+        const { Username , Email , Birthday , FavoriteMovies , Password  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             className: "profile-view",
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 183
+                lineNumber: 163
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("br", {
-                    __source: {
-                        fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 184
-                    },
-                    __self: this
-                }),
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 185
+                        lineNumber: 164
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 186
+                                lineNumber: 165
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                                    className: "user-profile",
+                                    className: "user-profile mb-3",
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 187
+                                        lineNumber: 166
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 188
+                                            lineNumber: 167
                                         },
                                         __self: this,
                                         children: [
                                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 189
+                                                    lineNumber: 168
                                                 },
                                                 __self: this,
                                                 children: "My profile information"
@@ -46487,7 +46464,7 @@ class ProfileView extends _reactDefault.default.Component {
                                                 className: "profile-info",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 190
+                                                    lineNumber: 169
                                                 },
                                                 __self: this,
                                                 children: [
@@ -46495,26 +46472,24 @@ class ProfileView extends _reactDefault.default.Component {
                                                         className: "label",
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 191
+                                                            lineNumber: 170
                                                         },
                                                         __self: this,
                                                         children: [
                                                             "User: ",
-                                                            Username,
-                                                            " "
+                                                            Username
                                                         ]
                                                     }),
                                                     /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
                                                         className: "label",
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 194
+                                                            lineNumber: 173
                                                         },
                                                         __self: this,
                                                         children: [
                                                             "Email: ",
-                                                            Email,
-                                                            " "
+                                                            Email
                                                         ]
                                                     })
                                                 ]
@@ -46522,62 +46497,54 @@ class ProfileView extends _reactDefault.default.Component {
                                         ]
                                     })
                                 }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
-                                    __source: {
-                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 201
-                                    },
-                                    __self: this
-                                }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 202
+                                        lineNumber: 179
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 203
+                                            lineNumber: 180
                                         },
                                         __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 204
-                                            },
-                                            __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 205
-                                                    },
-                                                    __self: this,
-                                                    children: "My favorite movies"
-                                                }),
-                                                FavoriteMovies.length === 0 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 207
-                                                    },
-                                                    __self: this,
-                                                    children: "No favorite movies yet"
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                                    className: "favorite-container",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 209
-                                                    },
-                                                    __self: this,
-                                                    children: FavoriteMovies.length > 0 && movies.map((movie)=>{
-                                                        if (movie._id === FavoriteMovies.find((fav)=>fav === movie._id
-                                                        )) return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 181
+                                                },
+                                                __self: this,
+                                                children: "My favorite movies"
+                                            }),
+                                            FavoriteMovies.length === 0 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 183
+                                                },
+                                                __self: this,
+                                                children: "No favorite movies yet"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                                                __source: {
+                                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                                    lineNumber: 185
+                                                },
+                                                __self: this,
+                                                children: FavoriteMovies.length > 0 && FavoriteMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                                        md: 6,
+                                                        className: "favorite-container",
+                                                        __source: {
+                                                            fileName: "src/components/profile-view/profile-view.jsx",
+                                                            lineNumber: 188
+                                                        },
+                                                        __self: this,
+                                                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
                                                             className: "favorite-movie card-content",
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 217
+                                                                lineNumber: 193
                                                             },
                                                             __self: this,
                                                             children: [
@@ -46587,14 +46554,14 @@ class ProfileView extends _reactDefault.default.Component {
                                                                     src: movie.ImagePath,
                                                                     __source: {
                                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                                        lineNumber: 221
+                                                                        lineNumber: 194
                                                                     },
                                                                     __self: this
                                                                 }),
                                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                                                     __source: {
                                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                                        lineNumber: 226
+                                                                        lineNumber: 199
                                                                     },
                                                                     __self: this,
                                                                     children: [
@@ -46602,7 +46569,7 @@ class ProfileView extends _reactDefault.default.Component {
                                                                             className: "movie_title",
                                                                             __source: {
                                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                                lineNumber: 227
+                                                                                lineNumber: 200
                                                                             },
                                                                             __self: this,
                                                                             children: movie.Title
@@ -46611,11 +46578,11 @@ class ProfileView extends _reactDefault.default.Component {
                                                                             size: "sm",
                                                                             variant: "danger",
                                                                             value: movie._id,
-                                                                            onClick: (e)=>this.onRemoveFavorite(e, movie)
+                                                                            onClick: ()=>this.onRemoveFavorite(movie)
                                                                             ,
                                                                             __source: {
                                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                                lineNumber: 231
+                                                                                lineNumber: 204
                                                                             },
                                                                             __self: this,
                                                                             children: "Remove"
@@ -46623,11 +46590,11 @@ class ProfileView extends _reactDefault.default.Component {
                                                                     ]
                                                                 })
                                                             ]
-                                                        }, movie._id));
-                                                    })
-                                                })
-                                            ]
-                                        })
+                                                        })
+                                                    }, movie._id)
+                                                )
+                                            })
+                                        ]
                                     })
                                 })
                             ]
@@ -46635,52 +46602,51 @@ class ProfileView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 251
+                                lineNumber: 220
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                                 className: "update-profile",
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 252
+                                    lineNumber: 221
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 253
+                                        lineNumber: 222
                                     },
                                     __self: this,
                                     children: [
                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 254
+                                                lineNumber: 223
                                             },
                                             __self: this,
                                             children: "Update Profile information"
                                         }),
                                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                                             className: "update-form",
-                                            onSubmit: (e)=>this.editUser(e, this.Username, this.Password, this.Email, this.Birthday)
-                                            ,
+                                            onSubmit: this.editUser,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 255
+                                                lineNumber: 224
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 267
+                                                        lineNumber: 225
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 268
+                                                                lineNumber: 226
                                                             },
                                                             __self: this,
                                                             children: "Username"
@@ -46688,13 +46654,13 @@ class ProfileView extends _reactDefault.default.Component {
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                             type: "text",
                                                             name: "Username",
+                                                            value: Username,
                                                             placeholder: "New Username",
-                                                            onChange: (e)=>this.setUsername(e.target.value)
-                                                            ,
+                                                            onChange: this.setUser,
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 269
+                                                                lineNumber: 227
                                                             },
                                                             __self: this
                                                         })
@@ -46703,14 +46669,14 @@ class ProfileView extends _reactDefault.default.Component {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 278
+                                                        lineNumber: 237
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 279
+                                                                lineNumber: 238
                                                             },
                                                             __self: this,
                                                             children: "Password"
@@ -46718,13 +46684,13 @@ class ProfileView extends _reactDefault.default.Component {
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                             type: "password",
                                                             name: "Password",
+                                                            value: Password,
                                                             placeholder: "New Password",
-                                                            onChange: (e)=>this.setPassword(e.target.value)
-                                                            ,
+                                                            onChange: this.setUser,
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 280
+                                                                lineNumber: 239
                                                             },
                                                             __self: this
                                                         })
@@ -46733,14 +46699,14 @@ class ProfileView extends _reactDefault.default.Component {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 289
+                                                        lineNumber: 249
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 290
+                                                                lineNumber: 250
                                                             },
                                                             __self: this,
                                                             children: "Email"
@@ -46748,13 +46714,13 @@ class ProfileView extends _reactDefault.default.Component {
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                             type: "email",
                                                             name: "Email",
+                                                            value: Email,
                                                             placeholder: "Enter Email",
-                                                            onChange: (e)=>this.setEmail(e.target.value)
-                                                            ,
+                                                            onChange: this.setUser,
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 291
+                                                                lineNumber: 251
                                                             },
                                                             __self: this
                                                         })
@@ -46763,14 +46729,14 @@ class ProfileView extends _reactDefault.default.Component {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 300
+                                                        lineNumber: 261
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 301
+                                                                lineNumber: 262
                                                             },
                                                             __self: this,
                                                             children: "Birthday"
@@ -46778,11 +46744,11 @@ class ProfileView extends _reactDefault.default.Component {
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                             type: "date",
                                                             name: "Birthday",
-                                                            onChange: (e)=>this.setBirthday(e.target.value)
-                                                            ,
+                                                            value: _dayjsDefault.default(Birthday).format("YYYY-MM-DD"),
+                                                            onChange: this.setUser,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 302
+                                                                lineNumber: 263
                                                             },
                                                             __self: this
                                                         })
@@ -46791,7 +46757,7 @@ class ProfileView extends _reactDefault.default.Component {
                                                 /*#__PURE__*/ _jsxRuntime.jsx("br", {
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 308
+                                                        lineNumber: 270
                                                     },
                                                     __self: this
                                                 }),
@@ -46799,17 +46765,16 @@ class ProfileView extends _reactDefault.default.Component {
                                                     className: "bt",
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 309
+                                                        lineNumber: 271
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                                             variant: "warning",
                                                             type: "submit",
-                                                            onClick: this.editUser,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 310
+                                                                lineNumber: 272
                                                             },
                                                             __self: this,
                                                             children: "Update Profile"
@@ -46817,11 +46782,10 @@ class ProfileView extends _reactDefault.default.Component {
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                                             className: "delete-button float-right",
                                                             variant: "danger",
-                                                            onClick: ()=>this.onDeleteUser()
-                                                            ,
+                                                            onClick: this.onDeleteUser,
                                                             __source: {
                                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 317
+                                                                lineNumber: 275
                                                             },
                                                             __self: this,
                                                             children: "Delete Profile"
@@ -46839,14 +46803,14 @@ class ProfileView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsx("br", {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 330
+                        lineNumber: 288
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("br", {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 331
+                        lineNumber: 289
                     },
                     __self: this
                 })
@@ -46860,7 +46824,296 @@ class ProfileView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-router-dom":"cpyQW","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp"}],"gb0ga":[function() {},{}],"j0Dt2":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-router-dom":"cpyQW","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"liKPg","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c2KHp","dayjs":"1BsTh"}],"gb0ga":[function() {},{}],"1BsTh":[function(require,module,exports) {
+!function(t, e) {
+    "object" == typeof exports && "undefined" != typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define(e) : (t = "undefined" != typeof globalThis ? globalThis : t || self).dayjs = e();
+}(this, function() {
+    "use strict";
+    var t = 1000, e = 60000, n = 3600000, r = "millisecond", i = "second", s = "minute", u = "hour", a = "day", o = "week", f = "month", h = "quarter", c = "year", d = "date", $ = "Invalid Date", l = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M = {
+        name: "en",
+        weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
+        months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_")
+    }, m = function(t1, e1, n1) {
+        var r1 = String(t1);
+        return !r1 || r1.length >= e1 ? t1 : "" + Array(e1 + 1 - r1.length).join(n1) + t1;
+    }, g = {
+        s: m,
+        z: function(t1) {
+            var e1 = -t1.utcOffset(), n1 = Math.abs(e1), r1 = Math.floor(n1 / 60), i1 = n1 % 60;
+            return (e1 <= 0 ? "+" : "-") + m(r1, 2, "0") + ":" + m(i1, 2, "0");
+        },
+        m: function t1(e1, n1) {
+            if (e1.date() < n1.date()) return -t1(n1, e1);
+            var r1 = 12 * (n1.year() - e1.year()) + (n1.month() - e1.month()), i1 = e1.clone().add(r1, f), s1 = n1 - i1 < 0, u1 = e1.clone().add(r1 + (s1 ? -1 : 1), f);
+            return +(-(r1 + (n1 - i1) / (s1 ? i1 - u1 : u1 - i1)) || 0);
+        },
+        a: function(t2) {
+            return t2 < 0 ? Math.ceil(t2) || 0 : Math.floor(t2);
+        },
+        p: function(t2) {
+            return ({
+                M: f,
+                y: c,
+                w: o,
+                d: a,
+                D: d,
+                h: u,
+                m: s,
+                s: i,
+                ms: r,
+                Q: h
+            })[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
+        },
+        u: function(t2) {
+            return (void 0) === t2;
+        }
+    }, D = "en", v = {
+    };
+    v[D] = M;
+    var p = function(t1) {
+        return t1 instanceof _;
+    }, S = function(t1, e1, n1) {
+        var r1;
+        if (!t1) return D;
+        if ("string" == typeof t1) v[t1] && (r1 = t1), e1 && (v[t1] = e1, r1 = t1);
+        else {
+            var i1 = t1.name;
+            v[i1] = t1, r1 = i1;
+        }
+        return !n1 && r1 && (D = r1), r1 || !n1 && D;
+    }, w = function(t1, e1) {
+        if (p(t1)) return t1.clone();
+        var n1 = "object" == typeof e1 ? e1 : {
+        };
+        return n1.date = t1, n1.args = arguments, new _(n1);
+    }, O = g;
+    O.l = S, O.i = p, O.w = function(t1, e1) {
+        return w(t1, {
+            locale: e1.$L,
+            utc: e1.$u,
+            x: e1.$x,
+            $offset: e1.$offset
+        });
+    };
+    var _ = function() {
+        function M1(t1) {
+            this.$L = S(t1.locale, null, !0), this.parse(t1);
+        }
+        var m1 = M1.prototype;
+        return m1.parse = function(t1) {
+            this.$d = (function(t2) {
+                var e1 = t2.date, n1 = t2.utc;
+                if (null === e1) return new Date(NaN);
+                if (O.u(e1)) return new Date;
+                if (e1 instanceof Date) return new Date(e1);
+                if ("string" == typeof e1 && !/Z$/i.test(e1)) {
+                    var r1 = e1.match(l);
+                    if (r1) {
+                        var i2 = r1[2] - 1 || 0, s1 = (r1[7] || "0").substring(0, 3);
+                        return n1 ? new Date(Date.UTC(r1[1], i2, r1[3] || 1, r1[4] || 0, r1[5] || 0, r1[6] || 0, s1)) : new Date(r1[1], i2, r1[3] || 1, r1[4] || 0, r1[5] || 0, r1[6] || 0, s1);
+                    }
+                }
+                return new Date(e1);
+            })(t1), this.$x = t1.x || {
+            }, this.init();
+        }, m1.init = function() {
+            var t1 = this.$d;
+            this.$y = t1.getFullYear(), this.$M = t1.getMonth(), this.$D = t1.getDate(), this.$W = t1.getDay(), this.$H = t1.getHours(), this.$m = t1.getMinutes(), this.$s = t1.getSeconds(), this.$ms = t1.getMilliseconds();
+        }, m1.$utils = function() {
+            return O;
+        }, m1.isValid = function() {
+            return !(this.$d.toString() === $);
+        }, m1.isSame = function(t1, e1) {
+            var n1 = w(t1);
+            return this.startOf(e1) <= n1 && n1 <= this.endOf(e1);
+        }, m1.isAfter = function(t1, e1) {
+            return w(t1) < this.startOf(e1);
+        }, m1.isBefore = function(t1, e1) {
+            return this.endOf(e1) < w(t1);
+        }, m1.$g = function(t1, e1, n1) {
+            return O.u(t1) ? this[e1] : this.set(n1, t1);
+        }, m1.unix = function() {
+            return Math.floor(this.valueOf() / 1000);
+        }, m1.valueOf = function() {
+            return this.$d.getTime();
+        }, m1.startOf = function(t1, e1) {
+            var n1 = this, r2 = !!O.u(e1) || e1, h1 = O.p(t1), $1 = function(t2, e2) {
+                var i3 = O.w(n1.$u ? Date.UTC(n1.$y, e2, t2) : new Date(n1.$y, e2, t2), n1);
+                return r2 ? i3 : i3.endOf(a);
+            }, l1 = function(t2, e2) {
+                return O.w(n1.toDate()[t2].apply(n1.toDate("s"), (r2 ? [
+                    0,
+                    0,
+                    0,
+                    0
+                ] : [
+                    23,
+                    59,
+                    59,
+                    999
+                ]).slice(e2)), n1);
+            }, y1 = this.$W, M2 = this.$M, m2 = this.$D, g1 = "set" + (this.$u ? "UTC" : "");
+            switch(h1){
+                case c:
+                    return r2 ? $1(1, 0) : $1(31, 11);
+                case f:
+                    return r2 ? $1(1, M2) : $1(0, M2 + 1);
+                case o:
+                    var D1 = this.$locale().weekStart || 0, v1 = (y1 < D1 ? y1 + 7 : y1) - D1;
+                    return $1(r2 ? m2 - v1 : m2 + (6 - v1), M2);
+                case a:
+                case d:
+                    return l1(g1 + "Hours", 0);
+                case u:
+                    return l1(g1 + "Minutes", 1);
+                case s:
+                    return l1(g1 + "Seconds", 2);
+                case i:
+                    return l1(g1 + "Milliseconds", 3);
+                default:
+                    return this.clone();
+            }
+        }, m1.endOf = function(t1) {
+            return this.startOf(t1, !1);
+        }, m1.$set = function(t1, e1) {
+            var n1, o1 = O.p(t1), h1 = "set" + (this.$u ? "UTC" : ""), $1 = (n1 = {
+            }, n1[a] = h1 + "Date", n1[d] = h1 + "Date", n1[f] = h1 + "Month", n1[c] = h1 + "FullYear", n1[u] = h1 + "Hours", n1[s] = h1 + "Minutes", n1[i] = h1 + "Seconds", n1[r] = h1 + "Milliseconds", n1)[o1], l1 = o1 === a ? this.$D + (e1 - this.$W) : e1;
+            if (o1 === f || o1 === c) {
+                var y1 = this.clone().set(d, 1);
+                y1.$d[$1](l1), y1.init(), this.$d = y1.set(d, Math.min(this.$D, y1.daysInMonth())).$d;
+            } else $1 && this.$d[$1](l1);
+            return this.init(), this;
+        }, m1.set = function(t1, e1) {
+            return this.clone().$set(t1, e1);
+        }, m1.get = function(t1) {
+            return this[O.p(t1)]();
+        }, m1.add = function(r2, h1) {
+            var d1, $1 = this;
+            r2 = Number(r2);
+            var l1 = O.p(h1), y2 = function(t1) {
+                var e1 = w($1);
+                return O.w(e1.date(e1.date() + Math.round(t1 * r2)), $1);
+            };
+            if (l1 === f) return this.set(f, this.$M + r2);
+            if (l1 === c) return this.set(c, this.$y + r2);
+            if (l1 === a) return y2(1);
+            if (l1 === o) return y2(7);
+            var M2 = (d1 = {
+            }, d1[s] = e, d1[u] = n, d1[i] = t, d1)[l1] || 1, m2 = this.$d.getTime() + r2 * M2;
+            return O.w(m2, this);
+        }, m1.subtract = function(t1, e1) {
+            return this.add(-1 * t1, e1);
+        }, m1.format = function(t1) {
+            var e1 = this, n1 = this.$locale();
+            if (!this.isValid()) return n1.invalidDate || $;
+            var r2 = t1 || "YYYY-MM-DDTHH:mm:ssZ", i3 = O.z(this), s2 = this.$H, u1 = this.$m, a1 = this.$M, o1 = n1.weekdays, f1 = n1.months, h1 = function(t2, n2, i4, s3) {
+                return t2 && (t2[n2] || t2(e1, r2)) || i4[n2].substr(0, s3);
+            }, c1 = function(t2) {
+                return O.s(s2 % 12 || 12, t2, "0");
+            }, d1 = n1.meridiem || function(t2, e2, n2) {
+                var r3 = t2 < 12 ? "AM" : "PM";
+                return n2 ? r3.toLowerCase() : r3;
+            }, l1 = {
+                YY: String(this.$y).slice(-2),
+                YYYY: this.$y,
+                M: a1 + 1,
+                MM: O.s(a1 + 1, 2, "0"),
+                MMM: h1(n1.monthsShort, a1, f1, 3),
+                MMMM: h1(f1, a1),
+                D: this.$D,
+                DD: O.s(this.$D, 2, "0"),
+                d: String(this.$W),
+                dd: h1(n1.weekdaysMin, this.$W, o1, 2),
+                ddd: h1(n1.weekdaysShort, this.$W, o1, 3),
+                dddd: o1[this.$W],
+                H: String(s2),
+                HH: O.s(s2, 2, "0"),
+                h: c1(1),
+                hh: c1(2),
+                a: d1(s2, u1, !0),
+                A: d1(s2, u1, !1),
+                m: String(u1),
+                mm: O.s(u1, 2, "0"),
+                s: String(this.$s),
+                ss: O.s(this.$s, 2, "0"),
+                SSS: O.s(this.$ms, 3, "0"),
+                Z: i3
+            };
+            return r2.replace(y, function(t2, e2) {
+                return e2 || l1[t2] || i3.replace(":", "");
+            });
+        }, m1.utcOffset = function() {
+            return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+        }, m1.diff = function(r2, d1, $1) {
+            var l1, y2 = O.p(d1), M2 = w(r2), m2 = (M2.utcOffset() - this.utcOffset()) * e, g1 = this - M2, D1 = O.m(this, M2);
+            return D1 = (l1 = {
+            }, l1[c] = D1 / 12, l1[f] = D1, l1[h] = D1 / 3, l1[o] = (g1 - m2) / 604800000, l1[a] = (g1 - m2) / 86400000, l1[u] = g1 / n, l1[s] = g1 / e, l1[i] = g1 / t, l1)[y2] || g1, $1 ? D1 : O.a(D1);
+        }, m1.daysInMonth = function() {
+            return this.endOf(f).$D;
+        }, m1.$locale = function() {
+            return v[this.$L];
+        }, m1.locale = function(t1, e1) {
+            if (!t1) return this.$L;
+            var n1 = this.clone(), r2 = S(t1, e1, !0);
+            return r2 && (n1.$L = r2), n1;
+        }, m1.clone = function() {
+            return O.w(this.$d, this);
+        }, m1.toDate = function() {
+            return new Date(this.valueOf());
+        }, m1.toJSON = function() {
+            return this.isValid() ? this.toISOString() : null;
+        }, m1.toISOString = function() {
+            return this.$d.toISOString();
+        }, m1.toString = function() {
+            return this.$d.toUTCString();
+        }, M1;
+    }(), b = _.prototype;
+    return w.prototype = b, [
+        [
+            "$ms",
+            r
+        ],
+        [
+            "$s",
+            i
+        ],
+        [
+            "$m",
+            s
+        ],
+        [
+            "$H",
+            u
+        ],
+        [
+            "$W",
+            a
+        ],
+        [
+            "$M",
+            f
+        ],
+        [
+            "$y",
+            c
+        ],
+        [
+            "$D",
+            d
+        ]
+    ].forEach(function(t1) {
+        b[t1[1]] = function(e1) {
+            return this.$g(e1, t1[0], t1[1]);
+        };
+    }), w.extend = function(t1, e1) {
+        return t1.$i || (t1(e1, _, w), t1.$i = !0), w;
+    }, w.locale = S, w.isDayjs = p, w.unix = function(t1) {
+        return w(1000 * t1);
+    }, w.en = v[D], w.Ls = v, w.p = {
+    }, w;
+});
+
+},{}],"j0Dt2":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$469c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
