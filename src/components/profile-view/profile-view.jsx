@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 
 import {
   Container,
@@ -19,12 +20,18 @@ export class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
+      Username: "",
+      Password: "",
+      Email: "",
+      Birthday: "",
       FavoriteMovies: [],
     };
+    this.LocalStorageUsername = localStorage.getItem("user");
+
+    //https://reactjs.org/docs/handling-events.html
+    this.setUser = this.setUser.bind(this);
+    this.editUser = this.editUser.bind(this);
+    this.onDeleteUser = this.onDeleteUser.bind(this);
   }
 
   componentDidMount() {
@@ -42,12 +49,15 @@ export class ProfileView extends React.Component {
   }
 
   getUser = (token) => {
-    const Username = localStorage.getItem("user");
     axios
-      .get(`https://myflix-application-2021.herokuapp.com//users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(
+        `https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
+        console.log(response.data);
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -64,17 +74,17 @@ export class ProfileView extends React.Component {
   // Allow user to edit or update profile
   editUser = (e) => {
     e.preventDefault();
-    const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
+    const { Email, Birthday, Password, Username } = this.state;
 
     axios
       .put(
-        `https://myflix-application-2021.herokuapp.com//users/${Username}`,
+        `https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`,
         {
-          Username: this.state.Username,
-          Password: this.state.Password,
-          Email: this.state.Email,
-          Birthday: this.state.Birthday,
+          Username,
+          Password,
+          Email,
+          Birthday,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -88,12 +98,10 @@ export class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
         });
 
-        localStorage.setItem("user", this.state.Username);
-        const data = response.data;
-        console.log(data);
-        console.log(this.state.Username);
+        localStorage.setItem("user", response.data.Username);
         alert("Profile is updated!");
-        window.open(`/users/${Username}`, "_self");
+        //just call get user again
+        this.getUser(token);
       })
       .catch(function (error) {
         console.log(error);
@@ -101,14 +109,12 @@ export class ProfileView extends React.Component {
   };
 
   // Delete a movie from FavoriteMovies list
-  onRemoveFavorite = (e, movie) => {
-    e.preventDefault();
-    const Username = localStorage.getItem("user");
+  onRemoveFavorite = (movie) => {
     const token = localStorage.getItem("token");
 
     axios
       .delete(
-        `https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}/movies/${movie._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -116,7 +122,7 @@ export class ProfileView extends React.Component {
       .then((response) => {
         console.log(response);
         alert("Movie is removed!");
-        this.componentDidMount();
+        this.getUser(token);
       })
       .catch(function (error) {
         console.log(error);
@@ -125,12 +131,11 @@ export class ProfileView extends React.Component {
 
   // Deregister
   onDeleteUser() {
-    const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     axios
       .delete(
-        `https://myflix-application-2021.herokuapp.com/users/${Username}`,
+        `https://myflix-application-2021.herokuapp.com/users/${this.LocalStorageUsername}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -147,130 +152,84 @@ export class ProfileView extends React.Component {
       });
   }
 
-  setUsername(value) {
-    this.setState({
-      Username: value,
-    });
-    this.Username = value;
-  }
-
-  setPassword(value) {
-    this.setState({
-      Password: value,
-    });
-    this.Password = value;
-  }
-
-  setEmail(value) {
-    this.setState({
-      Email: value,
-    });
-    this.Email = value;
-  }
-
-  setBirthday(value) {
-    this.setState({
-      Birthday: value,
-    });
-    this.Birthday = value;
+  setUser(e) {
+    let tempState = { ...this.state, [e.target.name]: e.target.value }; //make copy of state;
+    this.setState(tempState);
   }
 
   render() {
-    const { Username, Email, Birthday, FavoriteMovies } = this.state;
-    const { movies } = this.props;
-
+    const { Username, Email, Birthday, FavoriteMovies, Password } = this.state;
     return (
       <Container className="profile-view">
-        <br />
         <Row>
           <Col>
-            <Card className="user-profile">
+            <Card className="user-profile mb-3">
               <Card.Body>
                 <Card.Title>My profile information</Card.Title>
                 <ListGroup className="profile-info">
                   <ListGroup.Item className="label">
-                    User: {Username}{" "}
+                    User: {Username}
                   </ListGroup.Item>
                   <ListGroup.Item className="label">
-                    Email: {Email}{" "}
+                    Email: {Email}
                   </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
             </Card>
-
-            <br />
             <Card>
-              <Row>
-                <Card.Body>
-                  <Card.Title>My favorite movies</Card.Title>
-                  {FavoriteMovies.length === 0 && (
-                    <div>No favorite movies yet</div>
-                  )}
-                  <Col className="favorite-container">
-                    {FavoriteMovies.length > 0 &&
-                      movies.map((movie) => {
-                        if (
-                          movie._id ===
-                          FavoriteMovies.find((fav) => fav === movie._id)
-                        ) {
-                          return (
-                            <Card
-                              className="favorite-movie card-content"
-                              key={movie._id}
-                            >
-                              <Card.Img
-                                className="fav-poster"
-                                variant="top"
-                                src={movie.ImagePath}
-                              />
-                              <Card.Body>
-                                <Card.Title className="movie_title">
-                                  {movie.Title}
-                                </Card.Title>
+              <Card.Body>
+                <Card.Title>My favorite movies</Card.Title>
+                {FavoriteMovies.length === 0 && (
+                  <div>No favorite movies yet</div>
+                )}
+                <Row>
+                  {FavoriteMovies.length > 0 &&
+                    FavoriteMovies.map((movie) => (
+                      <Col
+                        md={6}
+                        key={movie._id}
+                        className="favorite-container"
+                      >
+                        <Card className="favorite-movie card-content">
+                          <Card.Img
+                            className="fav-poster"
+                            variant="top"
+                            src={movie.ImagePath}
+                          />
+                          <Card.Body>
+                            <Card.Title className="movie_title">
+                              {movie.Title}
+                            </Card.Title>
 
-                                <Button
-                                  size="sm"
-                                  variant="danger"
-                                  value={movie._id}
-                                  onClick={(e) =>
-                                    this.onRemoveFavorite(e, movie)
-                                  }
-                                >
-                                  Remove
-                                </Button>
-                              </Card.Body>
-                            </Card>
-                          );
-                        }
-                      })}
-                  </Col>
-                </Card.Body>
-              </Row>
+                            <Button
+                              size="sm"
+                              variant="danger"
+                              value={movie._id}
+                              onClick={() => this.onRemoveFavorite(movie)}
+                            >
+                              Remove
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                </Row>
+              </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card className="update-profile">
               <Card.Body>
                 <Card.Title>Update Profile information</Card.Title>
-                <Form
-                  className="update-form"
-                  onSubmit={(e) =>
-                    this.editUser(
-                      e,
-                      this.Username,
-                      this.Password,
-                      this.Email,
-                      this.Birthday
-                    )
-                  }
-                >
+                <Form className="update-form" onSubmit={this.editUser}>
                   <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                       type="text"
                       name="Username"
+                      value={Username}
                       placeholder="New Username"
-                      onChange={(e) => this.setUsername(e.target.value)}
+                      onChange={this.setUser}
                       required
                     />
                   </Form.Group>
@@ -280,8 +239,9 @@ export class ProfileView extends React.Component {
                     <Form.Control
                       type="password"
                       name="Password"
+                      value={Password}
                       placeholder="New Password"
-                      onChange={(e) => this.setPassword(e.target.value)}
+                      onChange={this.setUser}
                       required
                     />
                   </Form.Group>
@@ -291,8 +251,9 @@ export class ProfileView extends React.Component {
                     <Form.Control
                       type="email"
                       name="Email"
+                      value={Email}
                       placeholder="Enter Email"
-                      onChange={(e) => this.setEmail(e.target.value)}
+                      onChange={this.setUser}
                       required
                     />
                   </Form.Group>
@@ -302,22 +263,19 @@ export class ProfileView extends React.Component {
                     <Form.Control
                       type="date"
                       name="Birthday"
-                      onChange={(e) => this.setBirthday(e.target.value)}
+                      value={dayjs(Birthday).format("YYYY-MM-DD")}
+                      onChange={this.setUser}
                     />
                   </Form.Group>
                   <br />
                   <div className="bt">
-                    <Button
-                      variant="warning"
-                      type="submit"
-                      onClick={this.editUser}
-                    >
+                    <Button variant="warning" type="submit">
                       Update Profile
                     </Button>
                     <Button
                       className="delete-button float-right"
                       variant="danger"
-                      onClick={() => this.onDeleteUser()}
+                      onClick={this.onDeleteUser}
                     >
                       Delete Profile
                     </Button>
