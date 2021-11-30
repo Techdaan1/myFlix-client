@@ -10,14 +10,14 @@ import "./movie-view.scss";
 
 export class MovieView extends React.Component {
   addToFavs() {
-    const username = localStorage.getItem("user");
+    const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     const movieId = this.props.match.params.movieId;
-    const { movie } = this.props;
-    console.log(movie);
+
     axios
       .post(
-        `https://myflix-application-2021.herokuapp.com/users/${username}/movies/${movieId}`,
+        `https://myflix-application-2021.herokuapp.com/users/${Username}/movies/${movieId}`,
+        {},
         {
           headers: { Authorization: `Bearer ${token}` },
         }
