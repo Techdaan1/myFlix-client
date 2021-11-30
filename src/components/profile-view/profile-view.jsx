@@ -163,6 +163,7 @@ export class ProfileView extends React.Component {
       <Container className="profile-view">
         <Row>
           <Col>
+            <br />
             <Card className="user-profile mb-3">
               <Card.Body>
                 <Card.Title>My profile information</Card.Title>
@@ -176,48 +177,6 @@ export class ProfileView extends React.Component {
                 </ListGroup>
               </Card.Body>
             </Card>
-            <Card>
-              <Card.Body>
-                <Card.Title>My favorite movies</Card.Title>
-                {FavoriteMovies.length === 0 && (
-                  <div>No favorite movies yet</div>
-                )}
-                <Row>
-                  {FavoriteMovies.length > 0 &&
-                    FavoriteMovies.map((movie) => (
-                      <Col
-                        md={6}
-                        key={movie._id}
-                        className="favorite-container"
-                      >
-                        <Card className="favorite-movie card-content">
-                          <Card.Img
-                            className="fav-poster"
-                            variant="top"
-                            src={movie.ImagePath}
-                          />
-                          <Card.Body>
-                            <Card.Title className="movie_title">
-                              {movie.Title}
-                            </Card.Title>
-
-                            <Button
-                              size="sm"
-                              variant="danger"
-                              value={movie._id}
-                              onClick={() => this.onRemoveFavorite(movie)}
-                            >
-                              Remove
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    ))}
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
             <Card className="update-profile">
               <Card.Body>
                 <Card.Title>Update Profile information</Card.Title>
@@ -284,9 +243,54 @@ export class ProfileView extends React.Component {
               </Card.Body>
             </Card>
           </Col>
+
+          <Col>
+            <br />
+            <Card style={{ width: "45rem" }}>
+              <Card.Body>
+                <Card.Title>My favorite movies</Card.Title>
+                {FavoriteMovies.length === 0 && (
+                  <div>No favorite movies yet</div>
+                )}
+                <Row>
+                  {FavoriteMovies.length > 0 &&
+                    FavoriteMovies.map((movie) => (
+                      <Col
+                        md={3}
+                        key={movie._id}
+                        className="favorite-container"
+                      >
+                        <Card
+                          className="favorite-movie card-content"
+                          style={{ width: "10rem", height: "22rem" }}
+                        >
+                          <Card.Img
+                            className="fav-poster"
+                            variant="top"
+                            src={movie.ImagePath}
+                          />
+                          <Card.Body>
+                            <Card.Title className="movie_title">
+                              {movie.Title}
+                            </Card.Title>
+
+                            <Button
+                              size="sm"
+                              variant="danger"
+                              value={movie._id}
+                              onClick={() => this.onRemoveFavorite(movie)}
+                            >
+                              Remove
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
-        <br />
-        <br />
       </Container>
     );
   }
