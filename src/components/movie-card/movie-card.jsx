@@ -17,14 +17,10 @@ export class MovieCard extends React.Component {
         <Row>
           <Col>
             <CardGroup>
-              <Card className="rounded-lg" style={{ height: "27rem" }}>
+              <Card className="rounded-lg fluid" style={{ height: "27rem" }}>
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Img
-                    className="rounded md-5"
-                    src={movie.ImagePath}
-                    fluid="true"
-                  />
+                  <Card.Img className="rounded" src={movie.ImagePath} />
                   <br />
                   <div className="text-center">
                     <Link to={`/movies/${movie._id}`}>
