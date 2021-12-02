@@ -9,7 +9,7 @@ import { setMovies } from "../../actions/actions";
 
 import "./main-view.scss";
 
-import { MoviesList } from "../movies-list/movies-list";
+import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
 //import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -123,12 +123,10 @@ class MainView extends React.Component {
               exact
               path="/"
               render={() => {
-                if (!user)
-                  return (
-                    <Col>
-                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                    </Col>
-                  );
+                if (!user) return;
+                <Col>
+                  <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                </Col>;
                 if (movies.length === 0) return <div className="main-view" />;
                 return <MoviesList movies={movies} />;
               }}
@@ -187,7 +185,7 @@ class MainView extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return { movies: state.movies };
 };
 
