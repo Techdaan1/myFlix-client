@@ -48612,7 +48612,7 @@ function MoviesList(props) {
                     lineNumber: 27
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx("visibilityFilterInput", {
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
                     visibilityFilter: visibilityFilter,
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
