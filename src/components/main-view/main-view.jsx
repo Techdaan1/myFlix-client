@@ -9,9 +9,9 @@ import { setMovies } from "../../actions/actions";
 
 import "./main-view.scss";
 
-//import MoviesList from "../../movies-list/movies-list";
+import { MoviesList } from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
+//import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
@@ -21,12 +21,11 @@ import { NavbarView } from "../navbar-view/navbar-view";
 
 import { Row, Col, Container } from "react-bootstrap";
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
     //Initial state is set to null
     this.state = {
-      movies: [],
       selectedMovie: null,
       user: null,
     };
@@ -55,9 +54,7 @@ export class MainView extends React.Component {
       })
       .then((response) => {
         //Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -107,7 +104,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
     // If movies havent loaded yet display loading state.
     if (user && movies.length === 0) {
       return (
@@ -120,18 +118,20 @@ export class MainView extends React.Component {
         <br />
 
         {user ? (
-          <Row className="fluid">
-            {/* I think the link below should be in its own component. */}
+          <Row className="main-view justify-content-md-center fluid">
             <Route
               exact
               path="/"
-              render={() =>
-                movies.map((m) => (
-                  <Col md={3} key={m._id}>
-                    <MovieCard movie={m} />
-                  </Col>
-                ))
-              }
+              render={() => {
+                if (!user)
+                  return (
+                    <Col>
+                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    </Col>
+                  );
+                if (movies.length === 0) return <div className="main-view" />;
+                return <MoviesList movies={movies} />;
+              }}
             />
             <Route
               path="/movies/:movieId"
@@ -187,4 +187,8 @@ export class MainView extends React.Component {
   }
 }
 
-export default MainView;
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies })(MainView);
