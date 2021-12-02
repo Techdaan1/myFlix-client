@@ -48588,35 +48588,36 @@ function MoviesList(props) {
     let filteredMovies = movies;
     if (visibilityFilter !== "") filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
     );
-}
-_c = MoviesList;
-if (!movies) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-    className: "main-view",
-    __source: {
-        fileName: "src/components/movies-list/movies-list.jsx",
-        lineNumber: 23
-    },
-    __self: undefined
-}));
-exports.default = _reactRedux.connect(mapStateToProps)(MoviesList);
-var _c;
-return filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-        md: 3,
+    if (!movies) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        className: "main-view",
         __source: {
             fileName: "src/components/movies-list/movies-list.jsx",
-            lineNumber: 26
+            lineNumber: 22
         },
-        __self: undefined,
-        children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-            movie: m,
+        __self: this
+    }));
+    return filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+            md: 3,
             __source: {
                 fileName: "src/components/movies-list/movies-list.jsx",
-                lineNumber: 27
+                lineNumber: 25
             },
-            __self: undefined
-        })
-    }, m._id)
-);
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                movie: m,
+                __source: {
+                    fileName: "src/components/movies-list/movies-list.jsx",
+                    lineNumber: 26
+                },
+                __self: this
+            })
+        }, m._id)
+    );
+}
+_c = MoviesList;
+exports.default = _reactRedux.connect(mapStateToProps)(MoviesList);
+var _c;
+$RefreshReg$(_c, "MoviesList");
 
   $parcel$ReactRefreshHelpers$2519.postlude(module);
 } finally {
