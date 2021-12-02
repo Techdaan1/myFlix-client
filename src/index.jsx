@@ -19,7 +19,7 @@ class MyFlixApplication extends React.Component {
     return (
       <Provider store={store}>
         <Container>
-          <MainView className="bg-black" />
+          <MainView />
         </Container>
       </Provider>
     );
