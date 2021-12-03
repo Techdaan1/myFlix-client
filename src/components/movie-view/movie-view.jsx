@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-import { Container, Row, Col, Button, Card, CardGroup } from "React-bootstrap";
+import { Container, Row, Col, Button, Card, CardGroup } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
