@@ -16,25 +16,20 @@ export class MovieCard extends React.Component {
         <br />
         <Row>
           <Col>
-            <CardGroup>
-              <Card className="rounded-lg fluid" style={{ height: "27rem" }}>
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Img className="rounded" src={movie.ImagePath} />
-                  <br />
-                  <div className="text-center">
-                    <Link to={`/movies/${movie._id}`}>
-                      <Button
-                        className="btn btn-default"
-                        variant="primary bottom"
-                      >
-                        Movie information
-                      </Button>
-                    </Link>
-                  </div>
-                </Card.Body>
-              </Card>
-            </CardGroup>
+            <Card className="movie-card border-red rounded-lg fluid">
+              <Card.Body className="card-body d-flex flex-column">
+                <Card.Title>{movie.Title}</Card.Title>
+                <Card.Img className="rounded" src={movie.ImagePath} />
+                <br />
+                <div className="text-center">
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button className="btn btn-primary" type="button">
+                      Movie information
+                    </Button>
+                  </Link>
+                </div>
+              </Card.Body>
+            </Card>
             <br />
           </Col>
         </Row>
@@ -45,8 +40,12 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    ImagePath: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+    }),
   }).isRequired,
 };
