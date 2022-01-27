@@ -60,15 +60,13 @@ export class MovieView extends React.Component {
               <Card text-center="true">
                 <Card.Body>
                   <Row>
-                    <Col>
-                      <Card.Img
-                        xs={10}
-                        md={4}
-                        className="movie-poster rounded img-fluid"
-                        variant="top"
-                        src={movie.ImagePath}
-                      />
-                    </Col>
+                    <Col
+                      xs={10}
+                      md={4}
+                      className="movie-poster rounded img-fluid"
+                      variant="top"
+                      src={movie.ImagePath}
+                    ></Col>
                     <Col>
                       <div className="movie-title">
                         <h3 className="value">{movie.Title}</h3>
