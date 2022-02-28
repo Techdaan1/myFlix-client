@@ -1,5 +1,9 @@
 # MyFlix client project
 
+## Objective
+
+React has been used to build the client-side for an application called myFlix based on its existing server-side code (REST API and database).
+
 ## Technical requirements
 
 - The application must be a single-page application (SPA)
